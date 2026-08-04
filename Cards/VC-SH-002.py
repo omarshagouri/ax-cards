@@ -1,10 +1,8 @@
 # ============================================================
 # VC-SH-002.py  —  AmpCoreX Visual Card
 # Card: Versus (two bars)
-# Motion: title fades in (0.0-0.6s), bars grow up from the baseline
-#         (0.5-1.3s), then value labels rise in above each bar (1.3-1.7s)
-# Bars size themselves to the LEADING NUMBER of each value label,
-# so 1.5% vs 3% draws as half-height vs full-height automatically.
+# Motion: title fades in (0.0-0.6s), bars grow up from baseline
+#         (0.5-1.3s), value labels rise in above bars (1.3-1.7s)
 # ============================================================
 
 CARD = {
@@ -26,20 +24,21 @@ CARD = {
             transform-origin:bottom center; transform:scaleY(0);
             border-radius:4px 4px 0 0;
         }
-        #barA{ left:300px; background:#00D4AA; }   /* better/lower value = Teal  */
-        #barB{ left:600px; background:#FF7A3C; }   /* worse/higher value = Heat  */
+        #barA{ left:300px; background:#00D4AA; }
+        #barB{ left:600px; background:#FF7A3C; }
         .val{
             position:absolute; width:200px; text-align:center;
             color:#FFFFFF; font-size:64px; font-weight:700; opacity:0;
         }
         #valA{ left:300px; } #valB{ left:600px; }
         .axis{
-            position:absolute; bottom:540px; width:200px; text-align:center;
+            position:absolute; bottom:520px;
+            width:360px; text-align:center; white-space:nowrap;
             color:#8CA0B8; font-size:40px; font-weight:500; opacity:0;
         }
-        #labA{ left:300px; } #labB{ left:600px; }
+        #labA{ left:220px; } #labB{ left:520px; }
         #source{
-            position:absolute; bottom:105px; left:90px;
+            position:absolute; bottom:340px; left:90px;
             color:#8CA0B8; font-size:30px; font-weight:400; opacity:0;
             border-left:6px solid #00D4AA; padding-left:16px;
         }
@@ -64,30 +63,24 @@ CARD = {
         var labA=document.getElementById('labA'), labB=document.getElementById('labB');
         var source=document.getElementById('source');
 
-        // proportional heights from the leading number of each value label
         var a=parseFloat(valA.textContent)||0, b=parseFloat(valB.textContent)||0;
         var maxV=Math.max(a,b,0.0001), maxH=640;
         var hA=maxH*a/maxV, hB=maxH*b/maxV;
         barA.style.height=hA+'px'; barB.style.height=hB+'px';
-        // sit each value label just above its own bar's top
         valA.style.bottom=(620+hA+18)+'px';
         valB.style.bottom=(620+hB+18)+'px';
 
-        // title: fade + rise, 0.0-0.6s
         var te=easeOutCubic(clamp(t/0.6));
         title.style.opacity=te;
         title.style.transform='translateY('+(30*(1-te))+'px)';
 
-        // axis labels + source: fade in, 0.4-0.9s
         var fe=clamp((t-0.4)/0.5);
         labA.style.opacity=fe; labB.style.opacity=fe; source.style.opacity=fe;
 
-        // bars: grow up from baseline, 0.5-1.3s
         var ge=easeOutCubic(clamp((t-0.5)/0.8));
         barA.style.transform='scaleY('+ge+')';
         barB.style.transform='scaleY('+ge+')';
 
-        // value labels: fade + rise above bars, 1.3-1.7s
         var ve=easeOutCubic(clamp((t-1.3)/0.4));
         valA.style.opacity=ve; valB.style.opacity=ve;
         valA.style.transform='translateY('+(18*(1-ve))+'px)';
