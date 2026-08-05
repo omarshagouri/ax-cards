@@ -1,0 +1,20 @@
+CARD = {
+    "id": "VC-SF-009",
+    "slots": ["MYTH_LINE", "FACT_LINE", "SOURCE"],
+    "default_duration": 4.5,
+    "css": r""".mf-wrap{position:absolute;left:96px;top:0;width:888px;height:100%;display:flex;flex-direction:column;justify-content:center;}
+.mf-tag{font-family:'Space Grotesk';font-weight:600;font-size:30px;letter-spacing:.14em;text-transform:uppercase;opacity:0;transform:translateY(20px);}
+.mf-myth-tag{color:#8CA0B8;} .mf-fact-tag{color:#00D4AA;}
+.mf-myth{margin-top:16px;font-family:'Space Grotesk';font-weight:600;font-size:60px;line-height:1.16;color:#8CA0B8;text-decoration:line-through;text-decoration-color:#FF7A3C;text-decoration-thickness:5px;opacity:0;transform:translateY(28px);}
+.mf-gap{height:56px;}
+.mf-fact{margin-top:16px;font-family:'Space Grotesk';font-weight:700;font-size:70px;line-height:1.14;color:#FFFFFF;opacity:0;transform:translateY(30px);}
+.src{position:absolute;left:96px;bottom:320px;display:flex;align-items:center;gap:20px;opacity:0;}
+.src-bar{width:10px;height:44px;background:#00D4AA;border-radius:3px;}
+.src-txt{font-family:Inter;font-weight:600;font-size:30px;color:#FFFFFF;letter-spacing:.02em;}""",
+    "body": r"""<div class="mf-wrap"><div class="mf-tag mf-myth-tag" id="mfT1">The myth</div><div class="mf-myth" id="mfMyth">__MYTH_LINE__</div><div class="mf-gap"></div><div class="mf-tag mf-fact-tag" id="mfT2">The data</div><div class="mf-fact" id="mfFact">__FACT_LINE__</div></div>
+<div class="src" id="mfSrc"><div class="src-bar"></div><div class="src-txt">SOURCE: __SOURCE__</div></div>""",
+    "seek": r"""function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.opacity=e;el.style.transform='translateY('+(dy*(1-e))+'px)';}}
+function grow(id,a,b){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.transform='scaleX('+e+')';}}
+show('mfT1',0.10,0.7,20);show('mfMyth',0.4,1.15,28);show('mfT2',1.15,1.7,20);show('mfFact',1.45,2.25,30);
+var s=document.getElementById('mfSrc');if(s){var st=(s.textContent.indexOf('__')<0 && s.textContent.replace('SOURCE:','').trim().length>0);s.style.opacity=st?easeOutCubic(clamp((t-2.1)/0.6)):0;}""",
+}
