@@ -20,7 +20,7 @@ CARD = {
 .tc-sub{ margin:0; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:54px;
          line-height:1.2; color:#FFFFFF; text-shadow:0 3px 22px rgba(0,0,0,.5); }
 .tc-logo{ position:absolute; left:0; bottom:140px; width:1080px; text-align:center; }
-.tc-logo img{ height:200px; width:auto; display:inline-block; filter:drop-shadow(0 4px 20px rgba(0,0,0,.6)); }
+.tc-logo img{ height:120px; width:auto; display:inline-block; filter:drop-shadow(0 4px 20px rgba(0,0,0,.6)); }
 ''',
     "body": r'''
 <div class="tc-root">
