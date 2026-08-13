@@ -15,8 +15,8 @@ CARD = {
 .tc-bg{ position:absolute; inset:0; background-image:url("__BG_SRC__");
         background-size:cover; background-position:center; background-repeat:no-repeat; }
 .tc-veil{ position:absolute; inset:0; background:
-    linear-gradient(180deg, rgba(10,22,40,.94) 0%, rgba(10,22,40,.60) 24%,
-      rgba(10,22,40,.12) 42%, rgba(10,22,40,.18) 63%, rgba(10,22,40,.80) 85%, rgba(10,22,40,.97) 100%); }
+    linear-gradient(180deg, rgba(10,22,40,.72) 0%, rgba(10,22,40,.30) 22%,
+      rgba(10,22,40,.00) 42%, rgba(10,22,40,.00) 60%, rgba(10,22,40,.55) 84%, rgba(10,22,40,.90) 100%); }
 .tc-top{ position:absolute; top:214px; left:96px; width:840px; display:flex; flex-direction:column; gap:30px; }
 .tc-head{ margin:0; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:104px;
           line-height:1.08; letter-spacing:-1px; color:#FFFFFF; text-shadow:0 4px 30px rgba(0,0,0,.5); }
