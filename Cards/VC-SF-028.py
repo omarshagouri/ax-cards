@@ -4,6 +4,7 @@ CARD = {
     "slots": ["SERIES", "HEADLINE", "SUBHEAD"],
     "default_duration": 1.0,
     "css": r'''
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 .tc-root{ position:absolute; inset:0; background:#0A1628; overflow:hidden; }
 .tc-bg{ position:absolute; inset:0; background-image:url("__BG_SRC__");
         background-size:cover; background-position:center; background-repeat:no-repeat; }
@@ -11,8 +12,8 @@ CARD = {
     linear-gradient(180deg, rgba(10,22,40,.72) 0%, rgba(10,22,40,.30) 22%,
       rgba(10,22,40,.00) 42%, rgba(10,22,40,.00) 60%, rgba(10,22,40,.55) 84%, rgba(10,22,40,.90) 100%); }
 .tc-top{ position:absolute; top:180px; left:96px; width:840px; display:flex; flex-direction:column; gap:24px; }
-.tc-series{ margin:0; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:38px;
-            letter-spacing:4px; color:#FFFFFF; text-transform:uppercase; text-shadow:0 2px 20px rgba(0,0,0,.5); }
+.tc-series{ margin:0; font-family:'Space Mono', monospace; font-weight:400; font-size:38px;
+            letter-spacing:4px; color:#b3c6d7; text-transform:uppercase; text-shadow:0 2px 20px rgba(0,0,0,.5); }
 .tc-head{ margin:0; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:104px;
           line-height:1.08; letter-spacing:-1px; color:#FFFFFF; text-shadow:0 4px 30px rgba(0,0,0,.5); }
 .tc-head .key{ color:#00D4AA; }
