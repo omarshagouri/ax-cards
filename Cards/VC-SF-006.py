@@ -1,5 +1,4 @@
-# VC-SF-006  |  auto-fit safe-zone patch applied 2026-08-09
-# Text shrink-to-fit added at top of seek(); css/body unchanged.
+# VC-SF-006  |  caption-safe-zone pass 2026-08-18
 CARD = {
     "id": "VC-SF-006",
     "slots": ["TERM", "DEFINITION"],
@@ -7,7 +6,11 @@ CARD = {
     "css": r'''.def-wrap{position:absolute;left:96px;top:0;width:888px;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
 .def-term{font-family:'Space Grotesk';font-weight:700;font-size:104px;color:#00D4AA;opacity:0;transform:translateY(30px);}
 .def-eq{width:120px;height:4px;background:#8CA0B8;opacity:0;margin:36px 0;transform:scaleX(0);transform-origin:center;}
-.def-body{font-family:'Space Grotesk';font-weight:600;font-size:62px;line-height:1.2;color:#FFFFFF;opacity:0;transform:translateY(30px);}''',
+.def-body{font-family:'Space Grotesk';font-weight:600;font-size:62px;line-height:1.2;color:#FFFFFF;opacity:0;transform:translateY(30px);}
+
+/* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
+.def-wrap{top:192px !important;height:988px !important;}
+''',
     "body": r'''<div class="def-wrap"><div class="def-term" id="defTerm">__TERM__</div><div class="def-eq" id="defEq"></div><div class="def-body" id="defBody">__DEFINITION__</div></div>''',
     "seek": r'''
 if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){

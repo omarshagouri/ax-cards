@@ -1,5 +1,4 @@
-# VC-SF-016  |  auto-fit safe-zone patch applied 2026-08-09
-# Text shrink-to-fit added at top of seek(); css/body unchanged.
+# VC-SF-016  |  caption-safe-zone pass 2026-08-18
 CARD = {
     "id": "VC-SF-016",
     "slots": ["P1_YEAR", "P1_LABEL", "P2_YEAR", "P2_LABEL", "P3_YEAR", "P3_LABEL", "P4_YEAR", "P4_LABEL"],
@@ -11,7 +10,11 @@ CARD = {
 .tl-pt{position:absolute;transform:translateX(-50%);text-align:center;top:-14px;opacity:0;}
 .tl-dot{width:30px;height:30px;border-radius:50%;background:#00D4AA;margin:0 auto 18px;box-shadow:0 0 0 8px rgba(0,212,170,.18);}
 .tl-yr{font-family:'Space Grotesk';font-weight:700;font-size:44px;color:#FFFFFF;}
-.tl-lb{font-family:Inter;font-weight:400;font-size:32px;color:#8CA0B8;max-width:230px;margin:8px auto 0;line-height:1.2;}''',
+.tl-lb{font-family:Inter;font-weight:400;font-size:32px;color:#8CA0B8;max-width:230px;margin:8px auto 0;line-height:1.2;}
+
+/* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
+.tl-wrap{top:192px !important;height:988px !important;}
+''',
     "body": r'''<div class="tl-wrap"><div class="tl-line"><div class="tl-prog" id="tlProg"></div>
 <div class="tl-pts" id="tlPts">
 <div class="tl-pt" id="tp1" style="left:8%"><div class="tl-dot"></div><div class="tl-yr">__P1_YEAR__</div><div class="tl-lb">__P1_LABEL__</div></div>

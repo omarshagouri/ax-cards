@@ -1,12 +1,15 @@
-# VC-SF-005  |  auto-fit safe-zone patch applied 2026-08-09
-# Text shrink-to-fit added at top of seek(); css/body unchanged.
+# VC-SF-005  |  caption-safe-zone pass 2026-08-18
 CARD = {
     "id": "VC-SF-005",
     "slots": ["BEAT_LINE"],
     "default_duration": 3.5,
     "css": r'''.beat-wrap{position:absolute;left:96px;top:0;width:888px;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
 .beat-line{font-family:'Space Grotesk';font-weight:700;font-size:80px;line-height:1.14;color:#FFFFFF;opacity:0;transform:translateY(38px);}
-.beat-rule{width:200px;height:4px;background:#00D4AA;border-radius:2px;margin-top:40px;transform:scaleX(0);transform-origin:center;}''',
+.beat-rule{width:200px;height:4px;background:#00D4AA;border-radius:2px;margin-top:40px;transform:scaleX(0);transform-origin:center;}
+
+/* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
+.beat-wrap{top:192px !important;height:988px !important;}
+''',
     "body": r'''<div class="beat-wrap"><div class="beat-line" id="beatLine">__BEAT_LINE__</div><div class="beat-rule" id="beatRule"></div></div>''',
     "seek": r'''
 if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){

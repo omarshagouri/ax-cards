@@ -1,12 +1,15 @@
-# VC-SF-026  |  auto-fit safe-zone patch applied 2026-08-09
-# Text shrink-to-fit added at top of seek(); css/body unchanged.
+# VC-SF-026  |  caption-safe-zone pass 2026-08-18
 CARD = {
     "id": "VC-SF-026",
     "slots": ["SOURCE_NAME"],
     "default_duration": 2.5,
     "css": r'''.st-tag{position:absolute;left:96px;bottom:320px;display:flex;align-items:center;gap:20px;opacity:0;transform:translateX(-24px);}
 .st-bar{width:12px;height:48px;background:#00D4AA;border-radius:3px;}
-.st-txt{font-family:Inter;font-weight:600;font-size:32px;color:#FFFFFF;letter-spacing:.02em;}''',
+.st-txt{font-family:Inter;font-weight:600;font-size:32px;color:#FFFFFF;letter-spacing:.02em;}
+
+/* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
+.st-tag{bottom:820px !important;}
+''',
     "body": r'''<div class="st-tag" id="stTag"><div class="st-bar"></div><div class="st-txt">SOURCE: __SOURCE_NAME__</div></div>''',
     "seek": r'''
 if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){

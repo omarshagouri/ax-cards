@@ -1,5 +1,4 @@
-# VC-SF-018  |  auto-fit safe-zone patch applied 2026-08-09
-# Text shrink-to-fit added at top of seek(); css/body unchanged.
+# VC-SF-018  |  caption-safe-zone pass 2026-08-18
 CARD = {
     "id": "VC-SF-018",
     "slots": ["ITEM1", "ITEM2", "ITEM3", "ITEM4"],
@@ -8,7 +7,11 @@ CARD = {
 .ig-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px;}
 .ig-cell{background:rgba(10,22,40,.55);border:1px solid rgba(0,212,170,.3);border-radius:20px;padding:44px 30px;display:flex;flex-direction:column;align-items:center;gap:24px;text-align:center;opacity:0;transform:translateY(38px);}
 .ig-mark{width:70px;height:70px;border-radius:18px;background:rgba(0,212,170,.15);border:2px solid #00D4AA;display:flex;align-items:center;justify-content:center;color:#00D4AA;font-family:'Space Grotesk';font-weight:700;font-size:40px;}
-.ig-t{font-family:'Space Grotesk';font-weight:600;font-size:44px;color:#FFFFFF;line-height:1.15;}''',
+.ig-t{font-family:'Space Grotesk';font-weight:600;font-size:44px;color:#FFFFFF;line-height:1.15;}
+
+/* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
+.ig-wrap{top:192px !important;height:988px !important;}
+''',
     "body": r'''<div class="ig-wrap"><div class="ig-grid">
 <div class="ig-cell" id="ig1"><div class="ig-mark">&#9889;</div><div class="ig-t">__ITEM1__</div></div>
 <div class="ig-cell" id="ig2"><div class="ig-mark">&#9889;</div><div class="ig-t">__ITEM2__</div></div>

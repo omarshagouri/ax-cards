@@ -1,5 +1,4 @@
-# VC-SF-013  |  auto-fit safe-zone patch applied 2026-08-09
-# Text shrink-to-fit added at top of seek(); css/body unchanged.
+# VC-SF-013  |  caption-safe-zone pass 2026-08-18
 CARD = {
     "id": "VC-SF-013",
     "slots": ["VALUE", "METRIC_LABEL", "SOURCE"],
@@ -10,7 +9,11 @@ CARD = {
 .g-lab{margin-top:36px;font-family:'Space Grotesk';font-weight:600;font-size:40px;color:#8CA0B8;opacity:0;transform:translateY(24px);}
 .src{position:absolute;left:96px;bottom:320px;display:flex;align-items:center;gap:20px;opacity:0;}
 .src-bar{width:10px;height:44px;background:#00D4AA;border-radius:3px;}
-.src-txt{font-family:Inter;font-weight:600;font-size:30px;color:#FFFFFF;}''',
+.src-txt{font-family:Inter;font-weight:600;font-size:30px;color:#FFFFFF;}
+
+/* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
+.g-wrap{top:192px !important;height:988px !important;}.src{bottom:820px !important;}
+''',
     "body": r'''<div class="g-wrap"><div class="g-ring"><canvas id="gCanvas" width="520" height="520"></canvas><div class="g-val" id="gVal">__VALUE__</div></div>
 <div class="g-lab" id="gLab">__METRIC_LABEL__</div>
 <div class="src" id="gSrc"><div class="src-bar"></div><div class="src-txt">SOURCE: __SOURCE__</div></div></div>''',

@@ -1,5 +1,4 @@
-# VC-SF-014  |  auto-fit safe-zone patch applied 2026-08-09
-# Text shrink-to-fit added at top of seek(); css/body unchanged.
+# VC-SF-014  |  caption-safe-zone pass 2026-08-18
 CARD = {
     "id": "VC-SF-014",
     "slots": ["TEMP", "CAPTION", "SOURCE"],
@@ -9,7 +8,11 @@ CARD = {
 .th-row{display:flex;align-items:flex-end;gap:44px;}
 .th-tube{position:relative;width:78px;height:520px;background:rgba(140,160,184,.16);border-radius:40px;overflow:hidden;}
 .th-merc{position:absolute;left:0;bottom:0;width:100%;height:0;background:linear-gradient(180deg,#FF7A3C,#00D4AA);}
-.th-val{font-family:'Space Grotesk';font-weight:700;font-size:110px;color:#FFFFFF;opacity:0;transform:translateY(28px);}''',
+.th-val{font-family:'Space Grotesk';font-weight:700;font-size:110px;color:#FFFFFF;opacity:0;transform:translateY(28px);}
+
+/* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
+.th-wrap{top:192px !important;height:988px !important;}
+''',
     "body": r'''<div class="th-wrap"><div class="th-cap" id="thCap">__CAPTION__</div>
 <div class="th-row"><div class="th-tube"><div class="th-merc" id="thMerc"></div></div><div class="th-val" id="thVal">__TEMP__</div></div></div>''',
     "seek": r'''

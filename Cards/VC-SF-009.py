@@ -1,5 +1,4 @@
-# VC-SF-009  |  auto-fit safe-zone patch applied 2026-08-09
-# Text shrink-to-fit added at top of seek(); css/body unchanged.
+# VC-SF-009  |  caption-safe-zone pass 2026-08-18
 CARD = {
     "id": "VC-SF-009",
     "slots": ["MYTH_LINE", "FACT_LINE", "SOURCE"],
@@ -12,7 +11,11 @@ CARD = {
 .mf-fact{margin-top:16px;font-family:'Space Grotesk';font-weight:700;font-size:70px;line-height:1.14;color:#FFFFFF;opacity:0;transform:translateY(30px);}
 .src{position:absolute;left:96px;bottom:320px;display:flex;align-items:center;gap:20px;opacity:0;}
 .src-bar{width:10px;height:44px;background:#00D4AA;border-radius:3px;}
-.src-txt{font-family:Inter;font-weight:600;font-size:30px;color:#FFFFFF;letter-spacing:.02em;}''',
+.src-txt{font-family:Inter;font-weight:600;font-size:30px;color:#FFFFFF;letter-spacing:.02em;}
+
+/* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
+.mf-wrap{top:192px !important;height:988px !important;}.src{bottom:820px !important;}
+''',
     "body": r'''<div class="mf-wrap"><div class="mf-tag mf-myth-tag" id="mfT1">The myth</div><div class="mf-myth" id="mfMyth">__MYTH_LINE__</div><div class="mf-gap"></div><div class="mf-tag mf-fact-tag" id="mfT2">The data</div><div class="mf-fact" id="mfFact">__FACT_LINE__</div></div>
 <div class="src" id="mfSrc"><div class="src-bar"></div><div class="src-txt">SOURCE: __SOURCE__</div></div>''',
     "seek": r'''

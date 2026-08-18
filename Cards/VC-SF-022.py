@@ -1,5 +1,4 @@
-# VC-SF-022  |  auto-fit safe-zone patch applied 2026-08-09
-# Text shrink-to-fit added at top of seek(); css/body unchanged.
+# VC-SF-022  |  caption-safe-zone pass 2026-08-18
 CARD = {
     "id": "VC-SF-022",
     "slots": ["CTA_LINE"],
@@ -8,7 +7,11 @@ CARD = {
 .o-mark{font-family:'Space Grotesk';font-weight:700;font-size:130px;color:#FFFFFF;opacity:0;transform:translateY(30px);}
 .o-mark .x{color:#00D4AA;text-shadow:0 0 30px rgba(0,212,170,.7);}
 .o-tag{font-family:'Space Grotesk';font-weight:600;font-size:34px;letter-spacing:.22em;text-transform:uppercase;color:#00D4AA;margin-top:26px;opacity:0;transform:translateY(22px);}
-.o-cta{font-family:Inter;font-weight:600;font-size:44px;color:#FFFFFF;margin-top:70px;opacity:0;transform:translateY(24px);}''',
+.o-cta{font-family:Inter;font-weight:600;font-size:44px;color:#FFFFFF;margin-top:70px;opacity:0;transform:translateY(24px);}
+
+/* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
+.o-wrap{top:192px !important;height:988px !important;}
+''',
     "body": r'''<div class="o-wrap"><div class="o-mark" id="oMark">AmpCore<span class="x">X</span></div><div class="o-tag" id="oTag">Battery intelligence for the electric age</div><div class="o-cta" id="oCta">__CTA_LINE__</div></div>''',
     "seek": r'''
 if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){

@@ -1,5 +1,4 @@
-# VC-SF-008  |  auto-fit safe-zone patch applied 2026-08-09
-# Text shrink-to-fit added at top of seek(); css/body unchanged.
+# VC-SF-008  |  caption-safe-zone pass 2026-08-18
 CARD = {
     "id": "VC-SF-008",
     "slots": ["CORRECT_LABEL", "CORRECT_ITEM", "WRONG_LABEL", "WRONG_ITEM"],
@@ -11,7 +10,11 @@ CARD = {
 .elim-head{font-family:'Space Grotesk';font-weight:700;font-size:44px;letter-spacing:.04em;opacity:0;transform:translateY(24px);}
 .elim-item{margin-top:34px;font-family:'Space Grotesk';font-weight:700;font-size:64px;line-height:1.12;color:#FFFFFF;opacity:0;transform:translateY(30px);}
 .elim-ok{color:#00D4AA;} .elim-no{color:#FF7A3C;}
-.elim-rule{width:260px;height:4px;background:#00D4AA;border-radius:2px;margin-top:56px;transform:scaleX(0);transform-origin:center;}''',
+.elim-rule{width:260px;height:4px;background:#00D4AA;border-radius:2px;margin-top:56px;transform:scaleX(0);transform-origin:center;}
+
+/* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
+.elim-wrap{top:192px !important;height:988px !important;}
+''',
     "body": r'''<div class="elim-wrap"><div class="elim-row"><div class="elim-div" id="eDiv"></div>
 <div class="elim-col"><div class="elim-head elim-ok" id="eH1">__CORRECT_LABEL__ &#10003;</div><div class="elim-item" id="eI1">__CORRECT_ITEM__</div></div>
 <div class="elim-col"><div class="elim-head elim-no" id="eH2">__WRONG_LABEL__ &#10007;</div><div class="elim-item" id="eI2">__WRONG_ITEM__</div></div></div>

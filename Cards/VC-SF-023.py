@@ -1,5 +1,4 @@
-# VC-SF-023  |  auto-fit safe-zone patch applied 2026-08-09
-# Text shrink-to-fit added at top of seek(); css/body unchanged.
+# VC-SF-023  |  caption-safe-zone pass 2026-08-18
 CARD = {
     "id": "VC-SF-023",
     "slots": ["TITLE", "C1_LABEL", "C1_VALUE", "C2_LABEL", "C2_VALUE", "C3_LABEL", "C3_VALUE", "SOURCE"],
@@ -13,7 +12,11 @@ CARD = {
 .cb-lab{font-family:Inter;font-weight:600;font-size:34px;color:#8CA0B8;margin-top:22px;text-align:center;}
 .src{position:absolute;left:0;bottom:230px;display:flex;align-items:center;gap:20px;opacity:0;}
 .src-bar{width:10px;height:44px;background:#00D4AA;border-radius:3px;}
-.src-txt{font-family:Inter;font-weight:600;font-size:30px;color:#FFFFFF;}''',
+.src-txt{font-family:Inter;font-weight:600;font-size:30px;color:#FFFFFF;}
+
+/* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
+.cb-wrap{top:192px !important;height:988px !important;}.src{bottom:820px !important;}
+''',
     "body": r'''<div class="cb-wrap"><div class="cb-title" id="cbTitle">__TITLE__</div>
 <div class="cb-plot">
 <div class="cb-col" id="cbc1"><div class="cb-val" id="cbv1">__C1_VALUE__</div><div class="cb-bar" id="cbb1" style="background:#00D4AA"></div><div class="cb-lab">__C1_LABEL__</div></div>

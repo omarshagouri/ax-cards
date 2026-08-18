@@ -1,7 +1,4 @@
-# VC-SF-011  |  List card  —  REVEAL build-up + empty-item hide fix (+ auto-fit)
-# REVEAL slot: pass 1,2,3... to reveal that many items across reuses; the newest animates,
-# earlier items sit static. Leave REVEAL blank to cascade all filled items (original behavior).
-# Blank ITEMs are hidden completely (number chip included).
+# VC-SF-011  |  caption-safe-zone pass 2026-08-18
 CARD = {
     "id": "VC-SF-011",
     "slots": ["HEADER", "ITEM1", "ITEM2", "ITEM3", "ITEM4", "REVEAL"],
@@ -10,7 +7,11 @@ CARD = {
 .list-h{font-family:'Space Grotesk';font-weight:700;font-size:58px;color:#FFFFFF;margin-bottom:44px;opacity:0;transform:translateY(28px);}
 .li{display:flex;align-items:center;gap:28px;margin-bottom:34px;opacity:0;transform:translateY(30px);}
 .li-n{flex:0 0 auto;width:66px;height:66px;border-radius:16px;background:#00D4AA;color:#0A1628;font-family:'Space Grotesk';font-weight:700;font-size:38px;display:flex;align-items:center;justify-content:center;}
-.li-t{font-family:Inter;font-weight:500;font-size:46px;color:#FFFFFF;line-height:1.2;}''',
+.li-t{font-family:Inter;font-weight:500;font-size:46px;color:#FFFFFF;line-height:1.2;}
+
+/* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
+.list-wrap{top:192px !important;height:988px !important;}
+''',
     "body": r'''<div class="list-wrap"><div class="list-h" id="lH">__HEADER__</div>
 <div class="li" id="li1"><div class="li-n">1</div><div class="li-t">__ITEM1__</div></div>
 <div class="li" id="li2"><div class="li-n">2</div><div class="li-t">__ITEM2__</div></div>

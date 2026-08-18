@@ -1,5 +1,4 @@
-# VC-SF-004  |  auto-fit safe-zone patch applied 2026-08-09
-# Text shrink-to-fit added at top of seek(); css/body unchanged.
+# VC-SF-004  |  caption-safe-zone pass 2026-08-18
 CARD = {
     "id": "VC-SF-004",
     "slots": ["KICKER", "HOOK"],
@@ -25,6 +24,10 @@ CARD = {
   line-height:1.06; color:#FFFFFF;
   opacity:0; transform:translateY(48px);
 }
+
+
+/* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
+.hook-wrap{top:192px !important;height:988px !important;}
 ''',
     "body": r'''
 <div class="hook-wrap">

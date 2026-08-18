@@ -1,5 +1,4 @@
-# VC-SF-024  |  auto-fit safe-zone patch applied 2026-08-09
-# Text shrink-to-fit added at top of seek(); css/body unchanged.
+# VC-SF-024  |  caption-safe-zone pass 2026-08-18
 CARD = {
     "id": "VC-SF-024",
     "slots": ["TITLE", "PATH", "X_LABEL", "Y_LABEL", "ANNOTATION"],
@@ -9,7 +8,11 @@ CARD = {
 .cl-plot{position:relative;width:820px;height:460px;margin:0 auto;}
 .cl-yl{position:absolute;left:-70px;top:50%;transform:translateY(-50%) rotate(-90deg);font-family:'Space Grotesk';font-weight:600;font-size:32px;color:#00D4AA;}
 .cl-xl{position:absolute;bottom:-58px;left:50%;transform:translateX(-50%);font-family:'Space Grotesk';font-weight:600;font-size:32px;color:#00D4AA;}
-.cl-anno{font-family:Inter;font-weight:500;font-size:38px;color:#FFFFFF;text-align:center;margin-top:80px;opacity:0;transform:translateY(22px);}''',
+.cl-anno{font-family:Inter;font-weight:500;font-size:38px;color:#FFFFFF;text-align:center;margin-top:80px;opacity:0;transform:translateY(22px);}
+
+/* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
+.cl-wrap{top:192px !important;height:988px !important;}
+''',
     "body": r'''<div class="cl-wrap"><div class="cl-title" id="clTitle">__TITLE__</div>
 <div class="cl-plot"><svg width="820" height="460" viewBox="0 0 100 100" preserveAspectRatio="none" style="overflow:visible">
 <line x1="0" y1="100" x2="100" y2="100" stroke="rgba(140,160,184,.4)" stroke-width="0.6"/>

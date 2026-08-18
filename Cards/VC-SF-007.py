@@ -1,5 +1,4 @@
-# VC-SF-007  |  auto-fit safe-zone patch applied 2026-08-09
-# Text shrink-to-fit added at top of seek(); css/body unchanged.
+# VC-SF-007  |  caption-safe-zone pass 2026-08-18
 CARD = {
     "id": "VC-SF-007",
     "slots": ["WARNING_LINE", "DETAIL"],
@@ -9,7 +8,11 @@ CARD = {
 .warn-tri::after{content:'!';position:absolute;left:-11px;top:34px;font-family:'Space Grotesk';font-weight:700;font-size:56px;color:#0A1628;}
 .warn-pill{margin-top:34px;border:2px solid #FF7A3C;border-radius:12px;padding:12px 28px;font-family:'Space Grotesk';font-weight:600;font-size:30px;letter-spacing:.14em;color:#FF7A3C;opacity:0;transform:translateY(22px);}
 .warn-line{margin-top:40px;font-family:'Space Grotesk';font-weight:700;font-size:74px;line-height:1.14;color:#FFFFFF;opacity:0;transform:translateY(34px);}
-.warn-detail{margin-top:26px;font-family:Inter;font-weight:400;font-size:40px;line-height:1.3;color:#8CA0B8;opacity:0;transform:translateY(26px);}''',
+.warn-detail{margin-top:26px;font-family:Inter;font-weight:400;font-size:40px;line-height:1.3;color:#8CA0B8;opacity:0;transform:translateY(26px);}
+
+/* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
+.warn-wrap{top:192px !important;height:988px !important;}
+''',
     "body": r'''<div class="warn-wrap"><div class="warn-tri" id="wTri"></div><div class="warn-pill" id="wPill">WARNING</div><div class="warn-line" id="wLine">__WARNING_LINE__</div><div class="warn-detail" id="wDetail">__DETAIL__</div></div>''',
     "seek": r'''
 if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){

@@ -1,5 +1,4 @@
-# VC-SF-012  |  auto-fit safe-zone patch applied 2026-08-09
-# Text shrink-to-fit added at top of seek(); css/body unchanged.
+# VC-SF-012  |  caption-safe-zone pass 2026-08-18
 CARD = {
     "id": "VC-SF-012",
     "slots": ["LOW_PCT", "HIGH_PCT", "CAPTION"],
@@ -9,7 +8,11 @@ CARD = {
 .soc-track{position:relative;width:820px;height:96px;background:rgba(140,160,184,.18);border-radius:16px;overflow:hidden;}
 .soc-fill{position:absolute;top:0;height:100%;background:#00D4AA;transform:scaleX(0);transform-origin:left;}
 .soc-lab{position:absolute;top:-56px;font-family:'Space Grotesk';font-weight:700;font-size:40px;color:#00D4AA;opacity:0;}
-.soc-ends{width:820px;display:flex;justify-content:space-between;margin-top:22px;font-family:Inter;font-weight:600;font-size:32px;color:#8CA0B8;}''',
+.soc-ends{width:820px;display:flex;justify-content:space-between;margin-top:22px;font-family:Inter;font-weight:600;font-size:32px;color:#8CA0B8;}
+
+/* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
+.soc-wrap{top:192px !important;height:988px !important;}
+''',
     "body": r'''<div class="soc-wrap"><div class="soc-cap" id="socCap">__CAPTION__</div>
 <div class="soc-track"><div class="soc-fill" id="socFill"></div><div class="soc-lab" id="socLo">__LOW_PCT__%</div><div class="soc-lab" id="socHi">__HIGH_PCT__%</div></div>
 <div class="soc-ends"><span>0%</span><span>100%</span></div></div>''',

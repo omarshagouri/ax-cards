@@ -1,5 +1,4 @@
-# VC-SF-025  |  auto-fit safe-zone patch applied 2026-08-09
-# Text shrink-to-fit added at top of seek(); css/body unchanged.
+# VC-SF-025  |  caption-safe-zone pass 2026-08-18
 CARD = {
     "id": "VC-SF-025",
     "slots": ["USABLE_PCT", "TOP_BUFFER", "BOTTOM_BUFFER", "CAPTION"],
@@ -9,7 +8,11 @@ CARD = {
 .hb-batt{position:relative;width:260px;height:600px;border:6px solid #8CA0B8;border-radius:26px;overflow:hidden;display:flex;flex-direction:column;}
 .hb-seg{width:100%;height:0;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk';font-weight:700;font-size:38px;color:#0A1628;overflow:hidden;}
 .hb-top{background:rgba(255,122,60,.85);} .hb-use{background:#00D4AA;color:#0A1628;} .hb-bot{background:rgba(255,122,60,.85);}
-.hb-legend{margin-top:40px;font-family:Inter;font-weight:500;font-size:34px;color:#8CA0B8;text-align:center;opacity:0;}''',
+.hb-legend{margin-top:40px;font-family:Inter;font-weight:500;font-size:34px;color:#8CA0B8;text-align:center;opacity:0;}
+
+/* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
+.hb-wrap{top:192px !important;height:988px !important;}
+''',
     "body": r'''<div class="hb-wrap"><div class="hb-cap" id="hbCap">__CAPTION__</div>
 <div class="hb-batt"><div class="hb-seg hb-top" id="hbTop">buffer</div><div class="hb-seg hb-use" id="hbUse">__USABLE_PCT__ usable</div><div class="hb-seg hb-bot" id="hbBot">buffer</div></div>
 <div class="hb-legend" id="hbLeg">Teal is what you use. Orange is the hidden reserve.</div></div>''',

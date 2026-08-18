@@ -1,5 +1,4 @@
-# VC-SF-021  |  auto-fit safe-zone patch applied 2026-08-09
-# Text shrink-to-fit added at top of seek(); css/body unchanged.
+# VC-SF-021  |  caption-safe-zone pass 2026-08-18
 CARD = {
     "id": "VC-SF-021",
     "slots": ["ROLE_TEXT"],
@@ -8,7 +7,11 @@ CARD = {
 .lt-accent{width:12px;background:#00D4AA;border-radius:4px;}
 .lt-body{background:rgba(10,22,40,.85);border:1px solid rgba(0,212,170,.35);border-left:none;border-radius:0 14px 14px 0;padding:26px 36px;}
 .lt-role{font-family:'Space Grotesk';font-weight:700;font-size:48px;color:#FFFFFF;}
-.lt-sub{font-family:Inter;font-weight:500;font-size:32px;color:#00D4AA;letter-spacing:.1em;text-transform:uppercase;margin-top:6px;}''',
+.lt-sub{font-family:Inter;font-weight:500;font-size:32px;color:#00D4AA;letter-spacing:.1em;text-transform:uppercase;margin-top:6px;}
+
+/* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
+.lt-strip{bottom:820px !important;}
+''',
     "body": r'''<div class="lt-strip" id="ltStrip"><div class="lt-accent"></div><div class="lt-body"><div class="lt-role">__ROLE_TEXT__</div><div class="lt-sub">AmpCoreX</div></div></div>''',
     "seek": r'''
 if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){

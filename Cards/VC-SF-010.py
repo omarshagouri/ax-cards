@@ -1,5 +1,4 @@
-# VC-SF-010  |  auto-fit safe-zone patch applied 2026-08-09
-# Text shrink-to-fit added at top of seek(); css/body unchanged.
+# VC-SF-010  |  caption-safe-zone pass 2026-08-18
 CARD = {
     "id": "VC-SF-010",
     "slots": ["COL1_TITLE", "COL1_POINT", "COL2_TITLE", "COL2_POINT", "COL3_TITLE", "COL3_POINT"],
@@ -8,7 +7,11 @@ CARD = {
 .col{width:270px;min-height:360px;background:rgba(10,22,40,.55);border:1px solid rgba(0,212,170,.35);border-radius:20px;padding:36px 26px;opacity:0;transform:translateY(40px);}
 .col-t{font-family:'Space Grotesk';font-weight:700;font-size:40px;color:#00D4AA;line-height:1.1;}
 .col-bar{width:52px;height:4px;background:#00D4AA;border-radius:2px;margin:20px 0 24px;}
-.col-p{font-family:Inter;font-weight:400;font-size:38px;line-height:1.32;color:#FFFFFF;}''',
+.col-p{font-family:Inter;font-weight:400;font-size:38px;line-height:1.32;color:#FFFFFF;}
+
+/* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
+.col-wrap{top:192px !important;height:988px !important;}
+''',
     "body": r'''<div class="col-wrap">
 <div class="col" id="c1"><div class="col-t">__COL1_TITLE__</div><div class="col-bar"></div><div class="col-p">__COL1_POINT__</div></div>
 <div class="col" id="c2"><div class="col-t">__COL2_TITLE__</div><div class="col-bar"></div><div class="col-p">__COL2_POINT__</div></div>

@@ -1,5 +1,4 @@
-# VC-SF-019  |  auto-fit safe-zone patch applied 2026-08-09
-# Text shrink-to-fit added at top of seek(); css/body unchanged.
+# VC-SF-019  |  caption-safe-zone pass 2026-08-18
 CARD = {
     "id": "VC-SF-019",
     "slots": ["QUOTE_TEXT", "SOURCE_NAME"],
@@ -9,7 +8,11 @@ CARD = {
 .q-text{font-family:'Space Grotesk';font-weight:600;font-size:64px;line-height:1.24;color:#FFFFFF;opacity:0;transform:translateY(30px);}
 .q-src{display:flex;align-items:center;gap:20px;margin-top:44px;opacity:0;transform:translateY(20px);}
 .q-bar{width:52px;height:4px;background:#00D4AA;border-radius:2px;}
-.q-name{font-family:Inter;font-weight:600;font-size:38px;color:#8CA0B8;letter-spacing:.02em;}''',
+.q-name{font-family:Inter;font-weight:600;font-size:38px;color:#8CA0B8;letter-spacing:.02em;}
+
+/* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
+.q-wrap{top:192px !important;height:988px !important;}
+''',
     "body": r'''<div class="q-wrap"><div class="q-mark" id="qMark">&#8220;</div><div class="q-text" id="qText">__QUOTE_TEXT__</div>
 <div class="q-src" id="qSrc"><div class="q-bar"></div><div class="q-name">__SOURCE_NAME__</div></div></div>''',
     "seek": r'''

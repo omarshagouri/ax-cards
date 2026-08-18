@@ -1,5 +1,4 @@
-# VC-SF-015  |  auto-fit safe-zone patch applied 2026-08-09
-# Text shrink-to-fit added at top of seek(); css/body unchanged.
+# VC-SF-015  |  caption-safe-zone pass 2026-08-18
 CARD = {
     "id": "VC-SF-015",
     "slots": ["AMOUNT", "LABEL", "SOURCE"],
@@ -9,7 +8,11 @@ CARD = {
 .cost-amt{font-family:'Space Grotesk';font-weight:700;font-size:180px;line-height:1;color:#00D4AA;opacity:0;transform:scale(0.85);}
 .src{position:absolute;left:96px;bottom:320px;display:flex;align-items:center;gap:20px;opacity:0;}
 .src-bar{width:10px;height:44px;background:#00D4AA;border-radius:3px;}
-.src-txt{font-family:Inter;font-weight:600;font-size:30px;color:#FFFFFF;}''',
+.src-txt{font-family:Inter;font-weight:600;font-size:30px;color:#FFFFFF;}
+
+/* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
+.cost-wrap{top:192px !important;height:988px !important;}.src{bottom:820px !important;}
+''',
     "body": r'''<div class="cost-wrap"><div class="cost-lab" id="coLab">__LABEL__</div><div class="cost-amt" id="coAmt">__AMOUNT__</div></div>
 <div class="src" id="coSrc"><div class="src-bar"></div><div class="src-txt">SOURCE: __SOURCE__</div></div>''',
     "seek": r'''
