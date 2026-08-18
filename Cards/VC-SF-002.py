@@ -1,5 +1,4 @@
-# VC-SH-002  |  auto-fit safe-zone patch applied 2026-08-09
-# Text shrink-to-fit added at top of seek(); css/body unchanged.
+# VC-SH-002  |  caption-safe-zone pass 2026-08-18
 CARD = {
     "id": "VC-SH-002",
     "slots": ["TITLE", "VALUE_A", "LABEL_A", "VALUE_B", "LABEL_B", "SOURCE"],
@@ -36,7 +35,11 @@ CARD = {
             color:#8CA0B8; font-size:30px; font-weight:400; opacity:0;
             border-left:6px solid #00D4AA; padding-left:16px;
         }
-    ''',
+    
+
+/* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
+.baseline{bottom:1000px !important;}.bar{bottom:1000px !important;}.axis{bottom:900px !important;}#source{bottom:820px !important;}
+''',
     "body": r'''
         <div id="title">__TITLE__</div>
         <div class="baseline"></div>
@@ -70,11 +73,11 @@ __fit("#title",1000,180,0,1);__fit(".val",220,0,1,1);__fit(".axis",360,0,1,1);__
         var source=document.getElementById('source');
 
         var a=parseFloat(valA.textContent)||0, b=parseFloat(valB.textContent)||0;
-        var maxV=Math.max(a,b,0.0001), maxH=640;
+        var maxV=Math.max(a,b,0.0001), maxH=450;
         var hA=maxH*a/maxV, hB=maxH*b/maxV;
         barA.style.height=hA+'px'; barB.style.height=hB+'px';
-        valA.style.bottom=(620+hA+18)+'px';
-        valB.style.bottom=(620+hB+18)+'px';
+        valA.style.bottom=(1000+hA+18)+'px';
+        valB.style.bottom=(1000+hB+18)+'px';
 
         var te=easeOutCubic(clamp(t/0.6));
         title.style.opacity=te;
