@@ -9,12 +9,15 @@ CARD = {
 
 /* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
 .pr-wrap{top:192px !important;height:988px !important;}
+
+/* ax caption-safe v3: center ~y920, clamp bottom<=1340 (repo band bottom=1540) */
+#axsafe{position:absolute;left:0;top:0;width:1080px;height:1920px;transform:translateY(235px);}
 ''',
-    "body": r'''<div class="pr-wrap">
+    "body": r'''<div id="axsafe"><div class="pr-wrap">
 <div class="pr-step" id="ps1">__STEP1__</div><div class="pr-arr" id="pa1">&#9660;</div>
 <div class="pr-step" id="ps2">__STEP2__</div><div class="pr-arr" id="pa2">&#9660;</div>
 <div class="pr-step" id="ps3">__STEP3__</div><div class="pr-arr" id="pa3">&#9660;</div>
-<div class="pr-step" id="ps4">__STEP4__</div></div>''',
+<div class="pr-step" id="ps4">__STEP4__</div></div></div>''',
     "seek": r'''
 if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
 var els=document.querySelectorAll(sel);var ready=(!document.fonts)||document.fonts.status==='loaded';

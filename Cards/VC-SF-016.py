@@ -14,14 +14,17 @@ CARD = {
 
 /* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
 .tl-wrap{top:192px !important;height:988px !important;}
+
+/* ax caption-safe v3: center ~y920, clamp bottom<=1340 (repo band bottom=1540) */
+#axsafe{position:absolute;left:0;top:0;width:1080px;height:1920px;transform:translateY(187px);}
 ''',
-    "body": r'''<div class="tl-wrap"><div class="tl-line"><div class="tl-prog" id="tlProg"></div>
+    "body": r'''<div id="axsafe"><div class="tl-wrap"><div class="tl-line"><div class="tl-prog" id="tlProg"></div>
 <div class="tl-pts" id="tlPts">
 <div class="tl-pt" id="tp1" style="left:8%"><div class="tl-dot"></div><div class="tl-yr">__P1_YEAR__</div><div class="tl-lb">__P1_LABEL__</div></div>
 <div class="tl-pt" id="tp2" style="left:36%"><div class="tl-dot"></div><div class="tl-yr">__P2_YEAR__</div><div class="tl-lb">__P2_LABEL__</div></div>
 <div class="tl-pt" id="tp3" style="left:64%"><div class="tl-dot"></div><div class="tl-yr">__P3_YEAR__</div><div class="tl-lb">__P3_LABEL__</div></div>
 <div class="tl-pt" id="tp4" style="left:92%"><div class="tl-dot"></div><div class="tl-yr">__P4_YEAR__</div><div class="tl-lb">__P4_LABEL__</div></div>
-</div></div></div>''',
+</div></div></div></div>''',
     "seek": r'''
 if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
 var els=document.querySelectorAll(sel);var ready=(!document.fonts)||document.fonts.status==='loaded';

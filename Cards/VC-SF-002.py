@@ -39,8 +39,11 @@ CARD = {
 
 /* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
 .baseline{bottom:1000px !important;}.bar{bottom:1000px !important;}.axis{bottom:900px !important;}#source{bottom:820px !important;}
+
+/* ax caption-safe v3: center ~y920, clamp bottom<=1340 (repo band bottom=1540) */
+#axsafe{position:absolute;left:0;top:0;width:1080px;height:1920px;transform:translateY(241px);}
 ''',
-    "body": r'''
+    "body": r'''<div id="axsafe">
         <div id="title">__TITLE__</div>
         <div class="baseline"></div>
         <div class="bar" id="barA"></div>
@@ -50,7 +53,7 @@ CARD = {
         <div class="axis" id="labA">__LABEL_A__</div>
         <div class="axis" id="labB">__LABEL_B__</div>
         <div id="source">__SOURCE__</div>
-    ''',
+    </div>''',
     "seek": r'''
 if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
 var els=document.querySelectorAll(sel);var ready=(!document.fonts)||document.fonts.status==='loaded';

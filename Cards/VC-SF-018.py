@@ -11,12 +11,15 @@ CARD = {
 
 /* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
 .ig-wrap{top:192px !important;height:988px !important;}
+
+/* ax caption-safe v3: center ~y920, clamp bottom<=1340 (repo band bottom=1540) */
+#axsafe{position:absolute;left:0;top:0;width:1080px;height:1920px;transform:translateY(235px);}
 ''',
-    "body": r'''<div class="ig-wrap"><div class="ig-grid">
+    "body": r'''<div id="axsafe"><div class="ig-wrap"><div class="ig-grid">
 <div class="ig-cell" id="ig1"><div class="ig-mark">&#9889;</div><div class="ig-t">__ITEM1__</div></div>
 <div class="ig-cell" id="ig2"><div class="ig-mark">&#9889;</div><div class="ig-t">__ITEM2__</div></div>
 <div class="ig-cell" id="ig3"><div class="ig-mark">&#9889;</div><div class="ig-t">__ITEM3__</div></div>
-<div class="ig-cell" id="ig4"><div class="ig-mark">&#9889;</div><div class="ig-t">__ITEM4__</div></div></div></div>''',
+<div class="ig-cell" id="ig4"><div class="ig-mark">&#9889;</div><div class="ig-t">__ITEM4__</div></div></div></div></div>''',
     "seek": r'''
 if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
 var els=document.querySelectorAll(sel);var ready=(!document.fonts)||document.fonts.status==='loaded';

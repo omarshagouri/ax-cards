@@ -12,14 +12,17 @@ CARD = {
 
 /* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
 .cl-wrap{top:192px !important;height:988px !important;}
+
+/* ax caption-safe v3: center ~y920, clamp bottom<=1340 (repo band bottom=1540) */
+#axsafe{position:absolute;left:0;top:0;width:1080px;height:1920px;transform:translateY(230px);}
 ''',
-    "body": r'''<div class="cl-wrap"><div class="cl-title" id="clTitle">__TITLE__</div>
+    "body": r'''<div id="axsafe"><div class="cl-wrap"><div class="cl-title" id="clTitle">__TITLE__</div>
 <div class="cl-plot"><svg width="820" height="460" viewBox="0 0 100 100" preserveAspectRatio="none" style="overflow:visible">
 <line x1="0" y1="100" x2="100" y2="100" stroke="rgba(140,160,184,.4)" stroke-width="0.6"/>
 <line x1="0" y1="0" x2="0" y2="100" stroke="rgba(140,160,184,.4)" stroke-width="0.6"/>
 <polyline id="clPath" points="__PATH__" fill="none" stroke="#00D4AA" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
 </svg><div class="cl-yl">__Y_LABEL__</div><div class="cl-xl">__X_LABEL__</div></div>
-<div class="cl-anno" id="clAnno">__ANNOTATION__</div></div>''',
+<div class="cl-anno" id="clAnno">__ANNOTATION__</div></div></div>''',
     "seek": r'''
 if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
 var els=document.querySelectorAll(sel);var ready=(!document.fonts)||document.fonts.status==='loaded';

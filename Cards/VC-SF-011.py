@@ -11,12 +11,15 @@ CARD = {
 
 /* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
 .list-wrap{top:192px !important;height:988px !important;}
+
+/* ax caption-safe v3: center ~y920, clamp bottom<=1340 (repo band bottom=1540) */
+#axsafe{position:absolute;left:0;top:0;width:1080px;height:1920px;transform:translateY(245px);}
 ''',
-    "body": r'''<div class="list-wrap"><div class="list-h" id="lH">__HEADER__</div>
+    "body": r'''<div id="axsafe"><div class="list-wrap"><div class="list-h" id="lH">__HEADER__</div>
 <div class="li" id="li1"><div class="li-n">1</div><div class="li-t">__ITEM1__</div></div>
 <div class="li" id="li2"><div class="li-n">2</div><div class="li-t">__ITEM2__</div></div>
 <div class="li" id="li3"><div class="li-n">3</div><div class="li-t">__ITEM3__</div></div>
-<div class="li" id="li4"><div class="li-n">4</div><div class="li-t">__ITEM4__</div></div></div>''',
+<div class="li" id="li4"><div class="li-n">4</div><div class="li-t">__ITEM4__</div></div></div></div>''',
     "seek": r'''
 if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
 var els=document.querySelectorAll(sel);var ready=(!document.fonts)||document.fonts.status==='loaded';

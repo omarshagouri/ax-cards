@@ -29,15 +29,18 @@ CARD = {
             font-family:'Inter',sans-serif; font-size:36px; font-weight:600;
             letter-spacing:1px;
         }
-    ''',
-    "body": r'''
+    
+/* ax caption-safe v3: center ~y920, clamp bottom<=1340 (repo band bottom=1540) */
+#axsafe{position:absolute;left:0;top:0;width:1080px;height:1920px;transform:translateY(342px);}
+''',
+    "body": r'''<div id="axsafe">
         <div id="note">
             <div class="pill" id="pill">__TAG__</div>
             <div class="statement" id="stmt">__STATEMENT__</div>
             <div class="rule" id="rule"></div>
             <div class="role" id="role">__ROLE__</div>
         </div>
-    ''',
+    </div>''',
     "seek": r'''
 if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
 var els=document.querySelectorAll(sel);var ready=(!document.fonts)||document.fonts.status==='loaded';

@@ -14,11 +14,14 @@ CARD = {
 
 /* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
 .elim-wrap{top:192px !important;height:988px !important;}
+
+/* ax caption-safe v3: center ~y920, clamp bottom<=1340 (repo band bottom=1540) */
+#axsafe{position:absolute;left:0;top:0;width:1080px;height:1920px;transform:translateY(232px);}
 ''',
-    "body": r'''<div class="elim-wrap"><div class="elim-row"><div class="elim-div" id="eDiv"></div>
+    "body": r'''<div id="axsafe"><div class="elim-wrap"><div class="elim-row"><div class="elim-div" id="eDiv"></div>
 <div class="elim-col"><div class="elim-head elim-ok" id="eH1">__CORRECT_LABEL__ &#10003;</div><div class="elim-item" id="eI1">__CORRECT_ITEM__</div></div>
 <div class="elim-col"><div class="elim-head elim-no" id="eH2">__WRONG_LABEL__ &#10007;</div><div class="elim-item" id="eI2">__WRONG_ITEM__</div></div></div>
-<div class="elim-rule" id="eRule"></div></div>''',
+<div class="elim-rule" id="eRule"></div></div></div>''',
     "seek": r'''
 if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
 var els=document.querySelectorAll(sel);var ready=(!document.fonts)||document.fonts.status==='loaded';

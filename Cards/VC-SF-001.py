@@ -11,13 +11,16 @@ CARD = {
         .hero{ color:#FFFFFF; font-size:300px; font-weight:700; margin:0; line-height:1;
                opacity:0; transform: scale(0.85); }
         .hero .key{ color:#00D4AA; }
-    ''',
-    "body": r'''
+    
+/* ax caption-safe v3: center ~y920, clamp bottom<=1340 (repo band bottom=1540) */
+#axsafe{position:absolute;left:0;top:0;width:1080px;height:1920px;transform:translateY(318px);}
+''',
+    "body": r'''<div id="axsafe">
         <div id="block">
             <p class="kicker" id="kick">__KICKER__</p>
             <h1 class="hero" id="hero">__NUM__<span class="key">__PCT__</span></h1>
         </div>
-    ''',
+    </div>''',
     "seek": r'''
 if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
 var els=document.querySelectorAll(sel);var ready=(!document.fonts)||document.fonts.status==='loaded';

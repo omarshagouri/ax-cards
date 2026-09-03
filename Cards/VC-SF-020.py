@@ -6,8 +6,11 @@ CARD = {
     "default_duration": 3.0,
     "css": r'''.tag-chip{position:absolute;left:96px;top:300px;display:inline-flex;align-items:center;gap:16px;background:rgba(10,22,40,.82);border:2px solid #00D4AA;border-radius:14px;padding:20px 30px;opacity:0;transform:translateX(-30px);}
 .tag-dot{width:16px;height:16px;border-radius:50%;background:#00D4AA;}
-.tag-t{font-family:'Space Grotesk';font-weight:600;font-size:40px;letter-spacing:.06em;color:#FFFFFF;text-transform:uppercase;}''',
-    "body": r'''<div class="tag-chip" id="tagChip"><div class="tag-dot"></div><div class="tag-t">__TAG_TEXT__</div></div>''',
+.tag-t{font-family:'Space Grotesk';font-weight:600;font-size:40px;letter-spacing:.06em;color:#FFFFFF;text-transform:uppercase;}
+/* ax caption-safe v3: center ~y920, clamp bottom<=1340 (repo band bottom=1540) */
+#axsafe{position:absolute;left:0;top:0;width:1080px;height:1920px;transform:translateY(575px);}
+''',
+    "body": r'''<div id="axsafe"><div class="tag-chip" id="tagChip"><div class="tag-dot"></div><div class="tag-t">__TAG_TEXT__</div></div></div>''',
     "seek": r'''
 if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
 var els=document.querySelectorAll(sel);var ready=(!document.fonts)||document.fonts.status==='loaded';

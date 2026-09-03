@@ -16,14 +16,17 @@ CARD = {
 
 /* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
 .cb-wrap{top:192px !important;height:988px !important;}.src{bottom:820px !important;}
+
+/* ax caption-safe v3: center ~y920, clamp bottom<=1340 (repo band bottom=1540) */
+#axsafe{position:absolute;left:0;top:0;width:1080px;height:1920px;transform:translateY(184px);}
 ''',
-    "body": r'''<div class="cb-wrap"><div class="cb-title" id="cbTitle">__TITLE__</div>
+    "body": r'''<div id="axsafe"><div class="cb-wrap"><div class="cb-title" id="cbTitle">__TITLE__</div>
 <div class="cb-plot">
 <div class="cb-col" id="cbc1"><div class="cb-val" id="cbv1">__C1_VALUE__</div><div class="cb-bar" id="cbb1" style="background:#00D4AA"></div><div class="cb-lab">__C1_LABEL__</div></div>
 <div class="cb-col" id="cbc2"><div class="cb-val" id="cbv2">__C2_VALUE__</div><div class="cb-bar" id="cbb2" style="background:#FF7A3C"></div><div class="cb-lab">__C2_LABEL__</div></div>
 <div class="cb-col" id="cbc3"><div class="cb-val" id="cbv3">__C3_VALUE__</div><div class="cb-bar" id="cbb3" style="background:#00D4AA"></div><div class="cb-lab">__C3_LABEL__</div></div>
 </div></div>
-<div class="src" id="cbSrc"><div class="src-bar"></div><div class="src-txt">SOURCE: __SOURCE__</div></div>''',
+<div class="src" id="cbSrc"><div class="src-bar"></div><div class="src-txt">SOURCE: __SOURCE__</div></div></div>''',
     "seek": r'''
 if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
 var els=document.querySelectorAll(sel);var ready=(!document.fonts)||document.fonts.status==='loaded';

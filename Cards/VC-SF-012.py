@@ -12,10 +12,13 @@ CARD = {
 
 /* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
 .soc-wrap{top:192px !important;height:988px !important;}
+
+/* ax caption-safe v3: center ~y920, clamp bottom<=1340 (repo band bottom=1540) */
+#axsafe{position:absolute;left:0;top:0;width:1080px;height:1920px;transform:translateY(233px);}
 ''',
-    "body": r'''<div class="soc-wrap"><div class="soc-cap" id="socCap">__CAPTION__</div>
+    "body": r'''<div id="axsafe"><div class="soc-wrap"><div class="soc-cap" id="socCap">__CAPTION__</div>
 <div class="soc-track"><div class="soc-fill" id="socFill"></div><div class="soc-lab" id="socLo">__LOW_PCT__%</div><div class="soc-lab" id="socHi">__HIGH_PCT__%</div></div>
-<div class="soc-ends"><span>0%</span><span>100%</span></div></div>''',
+<div class="soc-ends"><span>0%</span><span>100%</span></div></div></div>''',
     "seek": r'''
 if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
 var els=document.querySelectorAll(sel);var ready=(!document.fonts)||document.fonts.status==='loaded';
