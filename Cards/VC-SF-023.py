@@ -47,7 +47,7 @@ var vals=[['cbc1','cbb1','cbv1','__C1_VALUE__'],['cbc2','cbb2','cbv2','__C2_VALU
 var nums=vals.map(function(v){return parseFloat((v[3].match(/[\d.]+/)||[0])[0]);});
 var mx=Math.max.apply(null,nums)||1;
 vals.forEach(function(v,i){var col=document.getElementById(v[0]);if(col&&col.querySelector('.cb-lab').textContent.indexOf('__')>-1){col.style.display='none';return;}
-var e=easeOutCubic(clamp((t-0.6-i*0.25)/0.9));document.getElementById(v[1]).style.height=(e*(nums[i]/mx)*500)+'px';
+var e=easeOutCubic(clamp((t-0.6-i*0.25)/0.9));document.getElementById(v[1]).style.height=(e*(nums[i]/mx)*400)+'px';
 document.getElementById(v[2]).style.opacity=easeOutCubic(clamp((t-0.9-i*0.25)/0.5));});
 show('cbTitle',0.1,0.8,26);
 var s=document.getElementById('cbSrc');if(s){var ok=s.textContent.indexOf('__')<0 && s.textContent.replace('SOURCE:','').trim().length>0;s.style.opacity=ok?easeOutCubic(clamp((t-2.0)/0.6)):0;}''',
