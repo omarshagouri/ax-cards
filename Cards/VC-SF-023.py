@@ -10,12 +10,12 @@ CARD = {
 .cb-val{font-family:'Space Grotesk';font-weight:700;font-size:56px;color:#FFFFFF;margin-bottom:16px;opacity:0;}
 .cb-bar{width:150px;border-radius:14px 14px 0 0;height:0;}
 .cb-lab{font-family:Inter;font-weight:600;font-size:34px;color:#8CA0B8;margin-top:22px;text-align:center;}
-.src{position:absolute;left:0;bottom:230px;display:flex;align-items:center;gap:20px;opacity:0;}
+.src{position:absolute;left:96;bottom:230px;display:flex;align-items:center;gap:20px;opacity:0;}
 .src-bar{width:10px;height:44px;background:#00D4AA;border-radius:3px;}
 .src-txt{font-family:Inter;font-weight:600;font-size:30px;color:#FFFFFF;}
 
 /* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
-.cb-wrap{top:192px !important;height:988px !important;}.src{bottom:600px !important;}
+.cb-wrap{top:192px !important;height:988px !important;}.src{bottom:600px !important;;left:96px !important;}
 
 /* ax caption-safe v3: center ~y920, clamp bottom<=1340 (repo band bottom=1540) */
 #axsafe{position:absolute;left:0;top:0;width:1080px;height:1920px;transform:translateY(184px);}
