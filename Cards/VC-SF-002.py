@@ -38,7 +38,7 @@ CARD = {
     
 
 /* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
-.baseline{bottom:1000px !important;}.bar{bottom:1000px !important;}.axis{bottom:900px !important;}#source{bottom:820px !important;}
+.baseline{bottom:1000px !important;}.bar{bottom:1000px !important;}.axis{bottom:900px !important;}#source{bottom:650px !important;}
 
 /* ax caption-safe v3: center ~y920, clamp bottom<=1340 (repo band bottom=1540) */
 #axsafe{position:absolute;left:0;top:0;width:1080px;height:1920px;transform:translateY(241px);}
