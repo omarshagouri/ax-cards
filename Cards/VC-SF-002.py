@@ -33,7 +33,7 @@ CARD = {
         #source{
             position:absolute; bottom:340px; left:90px;
             color:#8CA0B8; font-size:30px; font-weight:400; opacity:0;
-            border-left:6px solid #00D4AA; padding-left:16px;
+            border-left:12px solid #00D4AA; padding-left:10px;
         }
     
 
