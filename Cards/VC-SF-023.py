@@ -4,7 +4,7 @@ CARD = {
     "slots": ["TITLE", "C1_LABEL", "C1_VALUE", "C2_LABEL", "C2_VALUE", "C3_LABEL", "C3_VALUE", "SOURCE"],
     "default_duration": 4.5,
     "css": r'''.cb-wrap{position:absolute;left:96px;top:0;width:888px;height:100%;display:flex;flex-direction:column;justify-content:center;}
-.cb-title{font-family:'Space Grotesk';font-weight:700;font-size:60px;color:#FFFFFF;text-align:center;margin-bottom:60px;opacity:0;transform:translateY(26px);}
+.cb-title{font-family:'Space Grotesk';font-weight:700;font-size:60px;color:#FFFFFF;text-align:center;margin-bottom:160px;opacity:0;transform:translateY(26px);}
 .cb-plot{display:flex;justify-content:space-around;align-items:flex-end;height:520px;border-bottom:3px solid rgba(140,160,184,.4);}
 .cb-col{display:flex;flex-direction:column;align-items:center;width:220px;}
 .cb-val{font-family:'Space Grotesk';font-weight:700;font-size:56px;color:#FFFFFF;margin-bottom:16px;opacity:0;}
