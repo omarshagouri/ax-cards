@@ -35,7 +35,14 @@ if(ready){el.dataset.fitpx=size;el.dataset.fitok='1';}}
 };}
 
 __fit(".kicker",900,0,1,1);__fit(".hero",900,0,1,1);
-
+var keyEl = document.querySelector('.hero .key');
+if (keyEl && keyEl.textContent.trim().length > 3) {
+    keyEl.style.display = 'block';
+    keyEl.style.fontSize = '65px';
+    keyEl.style.marginTop = '15px';
+    keyEl.style.fontFamily = 'Inter, sans-serif';
+    keyEl.style.fontWeight = '600';
+}
         var kick = document.getElementById('kick');
         var hero = document.getElementById('hero');
         var we = easeOutCubic(clamp((t - 0.0) / 1.0));
