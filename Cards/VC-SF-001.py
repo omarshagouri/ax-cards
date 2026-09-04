@@ -34,7 +34,7 @@ while(size>16&&g<240&&(el.scrollWidth>el.clientWidth+0.5||(maxH&&el.scrollHeight
 if(ready){el.dataset.fitpx=size;el.dataset.fitok='1';}}
 };}
 
-__fit(".kicker",900,0,1,1);__fit(".hero",900,0,1,1);
+// 1. Run the auto-layout adjustment FIRST
 var keyEl = document.querySelector('.hero .key');
 if (keyEl && keyEl.textContent.trim().length > 3) {
     keyEl.style.display = 'block';
@@ -42,16 +42,22 @@ if (keyEl && keyEl.textContent.trim().length > 3) {
     keyEl.style.marginTop = '15px';
     keyEl.style.fontFamily = 'Inter, sans-serif';
     keyEl.style.fontWeight = '600';
+    keyEl.style.whiteSpace = 'normal';
 }
-        var kick = document.getElementById('kick');
-        var hero = document.getElementById('hero');
-        var we = easeOutCubic(clamp((t - 0.0) / 1.0));
-        kick.style.clipPath = 'inset(0 ' + (100 * (1 - we)) + '% 0 0)';
-        var pp = clamp((t - 1.0) / 0.5);
-        hero.style.opacity = pp > 0 ? 1 : 0;
-        var scale;
-        if (pp < 0.6){ scale = 0.85 + (1.05 - 0.85) * easeOutCubic(pp / 0.6); }
-        else { scale = 1.05 - (1.05 - 1.0) * easeOutCubic((pp - 0.6) / 0.4); }
-        hero.style.transform = 'scale(' + scale + ')';
+
+// 2. THEN run the shrink-to-fit calculator
+__fit(".kicker",900,0,1,1);
+__fit(".hero",900,0,1,1);
+
+var kick = document.getElementById('kick');
+var hero = document.getElementById('hero');
+var we = easeOutCubic(clamp((t - 0.0) / 1.0));
+kick.style.clipPath = 'inset(0 ' + (100 * (1 - we)) + '% 0 0)';
+var pp = clamp((t - 1.0) / 0.5);
+hero.style.opacity = pp > 0 ? 1 : 0;
+var scale;
+if (pp < 0.6){ scale = 0.85 + (1.05 - 0.85) * easeOutCubic(pp / 0.6); }
+else { scale = 1.05 - (1.05 - 1.0) * easeOutCubic((pp - 0.6) / 0.4); }
+hero.style.transform = 'scale(' + scale + ')';
     ''',
 }
