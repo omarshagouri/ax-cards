@@ -44,12 +44,20 @@ var rev=parseInt(('__REVEAL__'.match(/\d+/)||[''])[0],10);
 var noRev=isNaN(rev);
 var n=noRev?filled.length:rev;
 show('lH',0.10,0.80,28);
-var k=0;
-for(var j=0;j<filled.length;j++){var i=filled[j],el=document.getElementById('li'+i);
-  if(i>n){el.style.display='none';continue;}
-  if(noRev){show('li'+i,0.6+k*0.4,1.3+k*0.4,30);k++;}      // no REVEAL: cascade all (unchanged)
-  else if(i<n){el.style.opacity='1';el.style.transform='none';}   // already-revealed items sit static
-  else{show('li'+i,0.45,1.15,30);}                          // the newest item animates in
+show('lH', 0.10, 0.50, 28);
+var k = 0;
+var totalItems = filled.length || 1;
+for(var j = 0; j < filled.length; j++){
+  var i = filled[j], el = document.getElementById('li'+i);
+  if(i > n){ el.style.display = 'none'; continue; }
+  if(noRev){
+    var startTime = 0.6 + (k * (3.0 / totalItems));
+    var endTime = startTime + 0.6;
+    show('li'+i, startTime, endTime, 30);
+    k++;
+  }
+  else if(i < n){ el.style.opacity = '1'; el.style.transform = 'none'; }
+  else{ show('li'+i, 0.45, 1.15, 30); }
 }
 ''',
 }
