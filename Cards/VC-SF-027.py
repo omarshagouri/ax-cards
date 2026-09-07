@@ -7,8 +7,8 @@ CARD = {
     "body": r"""<div class="sting-wrap"><div class="sting-x" id="stingX">X</div></div>""",
     "seek": r"""function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.opacity=e;el.style.transform='translateY('+(dy*(1-e))+'px)';}}
 function grow(id,a,b){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.transform='scaleX('+e+')';}}
-var e=easeOutCubic(clamp((t-0.2)/0.8));var x=document.getElementById('stingX');
-x.style.opacity=Math.min(1,e*1.2);x.style.transform='scale('+(0.6+0.4*e)+')';
-var glow=40+80*Math.sin(clamp((t-0.2)/1.2)*Math.PI);x.style.textShadow='0 0 '+glow+'px rgba(0,212,170,'+(0.4+0.4*e)+')';
-if(t>1.9){var f=clamp((t-1.9)/0.5);x.style.opacity=(1-f);}""",
+var e=easeOutCubic(clamp((t-0.12*x)/(0.23*x)));var xel=document.getElementById('stingX');
+xel.style.opacity=Math.min(1,e*1.2);xel.style.transform='scale('+(0.6+0.4*e)+')';
+var glow=40+80*Math.sin(clamp((t-0.12*x)/(0.5*x))*Math.PI);xel.style.textShadow='0 0 '+glow+'px rgba(0,212,170,'+(0.4+0.4*e)+')';
+if(t>0.7*x){var f=clamp((t-0.7*x)/(0.27*x));xel.style.opacity=(1-f);}""",
 }

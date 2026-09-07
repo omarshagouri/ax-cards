@@ -43,26 +43,13 @@ for(var i=1;i<=4;i++){var el=document.getElementById('li'+i);if(!el)continue;var
 var rev=parseInt(('__REVEAL__'.match(/\d+/)||[''])[0],10);
 var noRev=isNaN(rev);
 var n=noRev?filled.length:rev;
-show('lH', 0.10, 0.60, 28);
-var k = 0;
-var totalItems = filled.length || 1;
-
-// Each item takes 0.8s to fade in. We space them out so the final item ends at exactly 4.0s.
-var itemDuration = 0.8; 
-var stagger = totalItems > 1 ? (4.0 - 0.6 - itemDuration) / (totalItems - 1) : 0;
-
-for(var j = 0; j < filled.length; j++){
-  var i = filled[j], el = document.getElementById('li'+i);
-  if(i > n){ el.style.display = 'none'; continue; }
-  
-  if(noRev){
-    var startTime = 0.6 + (k * stagger);
-    var endTime = startTime + itemDuration;
-    show('li'+i, startTime, endTime, 30);
-    k++;
-  }
-  else if(i < n){ el.style.opacity = '1'; el.style.transform = 'none'; }
-  else{ show('li'+i, 0.45, 1.15, 30); }
+show('lH',0.12*x,0.333*x,28);
+var k=0;
+for(var j=0;j<filled.length;j++){var i=filled[j],el=document.getElementById('li'+i);
+  if(i>n){el.style.display='none';continue;}
+  if(noRev){show('li'+i,(0.272+0.122*k)*x,(0.485+0.122*k)*x,30);k++;}      // no REVEAL: cascade all (unchanged)
+  else if(i<n){el.style.opacity='1';el.style.transform='none';}   // already-revealed items sit static
+  else{show('li'+i,0.227*x,0.439*x,30);}                          // the newest item animates in
 }
 ''',
 }

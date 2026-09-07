@@ -34,7 +34,7 @@ if(ready){el.dataset.fitpx=size;el.dataset.fitok='1';}}
 __fit(".cost-amt",940,0,1,1);__fit(".cost-lab",900,140,0,1);__fit(".src-txt",820,0,1,0);
 function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.opacity=e;el.style.transform='translateY('+(dy*(1-e))+'px)';}}
 function grow(id,a,b){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.transform='scaleX('+e+')';}}
-show('coLab',0.1,0.8,22);
-var e=easeOutCubic(clamp((t-0.55)/0.7));var a=document.getElementById('coAmt');a.style.opacity=e;a.style.transform='scale('+(0.85+0.15*e)+')';
-var s=document.getElementById('coSrc');if(s){var ok=s.textContent.indexOf('__')<0 && s.textContent.replace('SOURCE:','').trim().length>0;s.style.opacity=ok?easeOutCubic(clamp((t-1.3)/0.6)):0;}''',
+show('coLab',0.12*x,0.404*x,22);
+var e=easeOutCubic(clamp((t-0.302*x)/(0.284*x)));var a=document.getElementById('coAmt');a.style.opacity=e;a.style.transform='scale('+(0.85+0.15*e)+')';
+var s=document.getElementById('coSrc');if(s){var ok=s.textContent.indexOf('__')<0 && s.textContent.replace('SOURCE:','').trim().length>0;s.style.opacity=ok?easeOutCubic(clamp((t-0.607*x)/(0.243*x))):0;}''',
 }

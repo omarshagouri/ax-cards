@@ -37,5 +37,5 @@ __fit(".ig-t",320,170,0,1);
 function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.opacity=e;el.style.transform='translateY('+(dy*(1-e))+'px)';}}
 function grow(id,a,b){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.transform='scaleX('+e+')';}}
 ['ig1','ig2','ig3','ig4'].forEach(function(id){var el=document.getElementById(id);if(el&&el.querySelector('.ig-t').textContent.indexOf('__')>-1){el.style.display='none';}});
-show('ig1',0.15,0.85,38);show('ig2',0.5,1.2,38);show('ig3',0.85,1.55,38);show('ig4',1.2,1.9,38);''',
+show('ig1',0.12*x,0.412*x,38);show('ig2',0.266*x,0.558*x,38);show('ig3',0.412*x,0.704*x,38);show('ig4',0.558*x,0.85*x,38);''',
 }

@@ -34,7 +34,7 @@ if(ready){el.dataset.fitpx=size;el.dataset.fitok='1';}}
 __fit(".th-val",320,0,1,0);__fit(".th-cap",900,180,0,1);
 function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.opacity=e;el.style.transform='translateY('+(dy*(1-e))+'px)';}}
 function grow(id,a,b){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.transform='scaleX('+e+')';}}
-show('thCap',0.1,0.85,26);
-var e=easeOutCubic(clamp((t-0.7)/1.0));document.getElementById('thMerc').style.height=(e*100)+'%';
-show('thVal',1.3,2.0,28);''',
+show('thCap',0.12*x,0.408*x,26);
+var e=easeOutCubic(clamp((t-0.351*x)/(0.384*x)));document.getElementById('thMerc').style.height=(e*100)+'%';
+show('thVal',0.581*x,0.85*x,28);''',
 }

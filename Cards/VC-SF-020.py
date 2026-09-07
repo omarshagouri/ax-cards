@@ -27,5 +27,5 @@ if(ready){el.dataset.fitpx=size;el.dataset.fitok='1';}}
 __fit(".tag-t",700,0,1,0);
 function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.opacity=e;el.style.transform='translateY('+(dy*(1-e))+'px)';}}
 function grow(id,a,b){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.transform='scaleX('+e+')';}}
-var e=easeOutCubic(clamp((t-0.1)/0.6));var c=document.getElementById('tagChip');c.style.opacity=e;c.style.transform='translateX('+(-30*(1-e))+'px)';''',
+var e=easeOutCubic(clamp((t-0.12*x)/(0.33*x)));var c=document.getElementById('tagChip');c.style.opacity=e;c.style.transform='translateX('+(-30*(1-e))+'px)';''',
 }

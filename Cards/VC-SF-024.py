@@ -39,7 +39,7 @@ if(ready){el.dataset.fitpx=size;el.dataset.fitok='1';}}
 __fit(".cl-title",888,140,0,1);__fit(".cl-anno",888,180,0,1);
 function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.opacity=e;el.style.transform='translateY('+(dy*(1-e))+'px)';}}
 function grow(id,a,b){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.transform='scaleX('+e+')';}}
-show('clTitle',0.1,0.8,24);
-var p=document.getElementById('clPath');if(p){var len=p.getTotalLength?p.getTotalLength():500;p.style.strokeDasharray=len;var e=easeOutCubic(clamp((t-0.6)/1.5));p.style.strokeDashoffset=len*(1-e);}
-show('clAnno',1.9,2.6,22);''',
+show('clTitle',0.12*x,0.324*x,24);
+var p=document.getElementById('clPath');if(p){var len=p.getTotalLength?p.getTotalLength():500;p.style.strokeDasharray=len;var e=easeOutCubic(clamp((t-0.266*x)/(0.438*x)));p.style.strokeDashoffset=len*(1-e);}
+show('clAnno',0.646*x,0.85*x,22);''',
 }

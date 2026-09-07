@@ -31,7 +31,7 @@ if(ready){el.dataset.fitpx=size;el.dataset.fitok='1';}}
 __fit(".def-term",888,0,1,1);__fit(".def-body",888,520,0,1);
 function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.opacity=e;el.style.transform='translateY('+(dy*(1-e))+'px)';}}
 function grow(id,a,b){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.transform='scaleX('+e+')';}}
-show('defTerm',0.10,0.85,30);
-var e=easeOutCubic(clamp((t-0.6)/0.5));var eq=document.getElementById('defEq');eq.style.opacity=e;eq.style.transform='scaleX('+e+')';
-show('defBody',0.95,1.7,30);''',
+show('defTerm',0.12*x,0.462*x,30);
+var e=easeOutCubic(clamp((t-0.348*x)/(0.228*x)));var eq=document.getElementById('defEq');eq.style.opacity=e;eq.style.transform='scaleX('+e+')';
+show('defBody',0.508*x,0.85*x,30);''',
 }

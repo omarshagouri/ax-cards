@@ -30,5 +30,5 @@ if(ready){el.dataset.fitpx=size;el.dataset.fitok='1';}}
 __fit(".beat-line",888,700,0,1);
 function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.opacity=e;el.style.transform='translateY('+(dy*(1-e))+'px)';}}
 function grow(id,a,b){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.transform='scaleX('+e+')';}}
-show('beatLine',0.10,0.95,38);grow('beatRule',0.75,2.30);''',
+show('beatLine',0.12*x,0.402*x,38);grow('beatRule',0.336*x,0.85*x);''',
 }

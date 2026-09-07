@@ -34,5 +34,5 @@ if(ready){el.dataset.fitpx=size;el.dataset.fitok='1';}}
 __fit(".q-text",888,520,0,0);__fit(".q-name",740,0,1,0);
 function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.opacity=e;el.style.transform='translateY('+(dy*(1-e))+'px)';}}
 function grow(id,a,b){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.transform='scaleX('+e+')';}}
-show('qMark',0.1,0.7,20);show('qText',0.55,1.4,30);show('qSrc',1.35,2.0,20);''',
+show('qMark',0.12*x,0.351*x,20);show('qText',0.293*x,0.619*x,30);show('qSrc',0.6*x,0.85*x,20);''',
 }

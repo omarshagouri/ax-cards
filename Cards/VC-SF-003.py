@@ -67,16 +67,16 @@ __fit(".pill",800,0,1,1);__fit(".statement",840,600,0,1);__fit(".role",840,0,1,1
         pill.style.transform='scale('+(0.9+0.1*pe)+')';
 
         // statement: fade + rise, 0.4-1.1s
-        var se=easeOutCubic(clamp((t-0.4)/0.7));
+        var se=easeOutCubic(clamp((t-0.12*x)/(0.319*x)));
         stmt.style.opacity=se;
         stmt.style.transform='translateY('+(24*(1-se))+'px)';
 
         // teal rule: grow from center, 1.0-1.6s
-        var re=easeOutCubic(clamp((t-1.0)/0.6));
+        var re=easeOutCubic(clamp((t-0.394*x)/(0.274*x)));
         rule.style.transform='scaleX('+re+')';
 
         // role: fade + rise, 1.5-2.0s
-        var oe=easeOutCubic(clamp((t-1.5)/0.5));
+        var oe=easeOutCubic(clamp((t-0.622*x)/(0.228*x)));
         role.style.opacity=oe;
         role.style.transform='translateY('+(16*(1-oe))+'px)';
     ''',

@@ -35,5 +35,5 @@ __fit(".pr-step",640,160,0,1);
 function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.opacity=e;el.style.transform='translateY('+(dy*(1-e))+'px)';}}
 function grow(id,a,b){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.transform='scaleX('+e+')';}}
 [['ps4','pa3'],['ps3','pa2'],['ps2','pa1']].forEach(function(pr){var el=document.getElementById(pr[0]);if(el&&el.textContent.indexOf('__')>-1){el.style.display='none';var a=document.getElementById(pr[1]);if(a)a.style.display='none';}});
-show('ps1',0.15,0.85,34);show('pa1',0.7,1.1,10);show('ps2',0.95,1.6,34);show('pa2',1.45,1.85,10);show('ps3',1.7,2.35,34);show('pa3',2.2,2.6,10);show('ps4',2.45,3.1,34);''',
+show('ps1',0.12*x,0.293*x,34);show('pa1',0.256*x,0.355*x,10);show('ps2',0.318*x,0.479*x,34);show('pa2',0.442*x,0.541*x,10);show('ps3',0.504*x,0.664*x,34);show('pa3',0.627*x,0.726*x,10);show('ps4',0.689*x,0.85*x,34);''',
 }

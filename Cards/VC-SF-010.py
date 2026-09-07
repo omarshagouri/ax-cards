@@ -36,5 +36,5 @@ __fit(".col-t",224,0,1,1);__fit(".col-p",224,240,0,1);
 function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.opacity=e;el.style.transform='translateY('+(dy*(1-e))+'px)';}}
 function grow(id,a,b){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.transform='scaleX('+e+')';}}
 ['c1','c2','c3'].forEach(function(id){var el=document.getElementById(id);if(el&&el.textContent.indexOf('__')>-1){el.style.display='none';}});
-show('c1',0.15,0.9,40);show('c2',0.6,1.35,40);show('c3',1.05,1.8,40);''',
+show('c1',0.12*x,0.452*x,40);show('c2',0.319*x,0.651*x,40);show('c3',0.518*x,0.85*x,40);''',
 }

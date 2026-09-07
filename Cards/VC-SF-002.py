@@ -86,14 +86,14 @@ __fit("#title",1000,180,0,1);__fit(".val",220,0,1,1);__fit(".axis",360,0,1,1);__
         title.style.opacity=te;
         title.style.transform='translateY('+(30*(1-te))+'px)';
 
-        var fe=clamp((t-0.4)/0.5);
+        var fe=clamp((t-0.12*x)/(0.281*x));
         labA.style.opacity=fe; labB.style.opacity=fe; source.style.opacity=fe;
 
-        var ge=easeOutCubic(clamp((t-0.5)/0.8));
+        var ge=easeOutCubic(clamp((t-0.176*x)/(0.449*x)));
         barA.style.transform='scaleY('+ge+')';
         barB.style.transform='scaleY('+ge+')';
 
-        var ve=easeOutCubic(clamp((t-1.3)/0.4));
+        var ve=easeOutCubic(clamp((t-0.625*x)/(0.225*x)));
         valA.style.opacity=ve; valB.style.opacity=ve;
         valA.style.transform='translateY('+(18*(1-ve))+'px)';
         valB.style.transform='translateY('+(18*(1-ve))+'px)';

@@ -38,13 +38,13 @@ function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.
 function grow(id,a,b){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.transform='scaleX('+e+')';}}
 var cv=document.getElementById('gCanvas');var ctx=cv.getContext('2d');var cx=260,cy=260,r=210;
 var full=parseFloat(('__VALUE__'.match(/[\d.]+/)||[0])[0]);
-var e=easeOutCubic(clamp((t-0.15)/1.1));var frac=(full/100)*e;
+var e=easeOutCubic(clamp((t-0.12*x)/(0.412*x)));var frac=(full/100)*e;
 ctx.clearRect(0,0,520,520);ctx.lineWidth=34;ctx.lineCap='round';
 ctx.strokeStyle='rgba(140,160,184,0.20)';ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.stroke();
 ctx.strokeStyle='#00D4AA';ctx.beginPath();ctx.arc(cx,cy,r,-Math.PI/2,-Math.PI/2+frac*Math.PI*2);ctx.stroke();
-var gv=document.getElementById('gVal');gv.style.opacity=easeOutCubic(clamp((t-0.5)/0.6));
+var gv=document.getElementById('gVal');gv.style.opacity=easeOutCubic(clamp((t-0.251*x)/(0.225*x)));
 if(!gv.dataset.full){gv.dataset.full=gv.textContent;}
 var num=(full*e);var suf=gv.dataset.full.replace(/[\d.\s]/g,'');gv.textContent=(Math.round(num))+suf;
-show('gLab',1.1,1.7,24);
-var s=document.getElementById('gSrc');if(s){var ok=s.textContent.indexOf('__')<0 && s.textContent.replace('SOURCE:','').trim().length>0;s.style.opacity=ok?easeOutCubic(clamp((t-1.5)/0.6)):0;}''',
+show('gLab',0.476*x,0.7*x,24);
+var s=document.getElementById('gSrc');if(s){var ok=s.textContent.indexOf('__')<0 && s.textContent.replace('SOURCE:','').trim().length>0;s.style.opacity=ok?easeOutCubic(clamp((t-0.625*x)/(0.225*x))):0;}''',
 }
