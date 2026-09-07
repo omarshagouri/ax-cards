@@ -4,25 +4,22 @@ CARD = {
     "slots": ["VALUE", "METRIC_LABEL", "SOURCE"],
     "default_duration": 4.0,
     "css": r'''.g-wrap{position:absolute;left:0;top:0;width:1080px;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;}
-.g-wrap{position:absolute;left:0;top:0;width:1080px;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;}
 .g-ring{position:relative;width:520px;height:520px;}
 .g-val{position:absolute;left:0;top:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk';font-weight:700;font-size:150px;color:#FFFFFF;opacity:0;}
-.g-lab{margin-top:36px;margin-bottom:40px;font-family:'Space Grotesk';font-weight:600;font-size:40px;color:#8CA0B8;opacity:0;transform:translateY(24px);}
-.src{display:flex;align-items:center;gap:20px;opacity:0;}
-.src-bar{width:10px;height:44px;background:#00D4AA;border-radius:3px;flex-shrink:0;}
+.g-lab{margin-top:36px;font-family:'Space Grotesk';font-weight:600;font-size:40px;color:#8CA0B8;opacity:0;transform:translateY(24px);}
+.src{position:absolute;left:96px;bottom:320px;display:flex;align-items:center;gap:20px;opacity:0;}
+.src-bar{width:10px;height:44px;background:#00D4AA;border-radius:3px;}
 .src-txt{font-family:Inter;font-weight:600;font-size:30px;color:#FFFFFF;}
 
-/* --- caption-safe-zone pass: keep all text above y=1180 --- */
-.g-wrap{top:150px !important;height:1030px !important;}
-
-#axsafe{position:absolute;left:0;top:0;width:1080px;height:1920px;transform:translateY(269px);}
+/* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
+.g-wrap{top:192px !important;height:988px !important;}.src{bottom:600px !important;}
 
 /* ax caption-safe v3: center ~y920, clamp bottom<=1340 (repo band bottom=1540) */
 #axsafe{position:absolute;left:0;top:0;width:1080px;height:1920px;transform:translateY(269px);}
 ''',
     "body": r'''<div id="axsafe"><div class="g-wrap"><div class="g-ring"><canvas id="gCanvas" width="520" height="520"></canvas><div class="g-val" id="gVal">__VALUE__</div></div>
-<div class="g-lab" id="gLab">__METRIC_LABEL__</div>
-<div class="src" id="gSrc"><div class="src-bar"></div><div class="src-txt">SOURCE: __SOURCE__</div></div></div></div>''',
+<div class="g-lab" id="gLab">__METRIC_LABEL__</div></div>
+<div class="src" id="gSrc"><div class="src-bar"></div><div class="src-txt">SOURCE: __SOURCE__</div></div></div>''',
     "seek": r'''
 var x=(typeof x!=='undefined'&&x>0)?x:4;
 var HOLD=1,ENTER=0.5;
