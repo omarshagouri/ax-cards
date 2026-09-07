@@ -22,7 +22,7 @@ CARD = {
 <div class="soc-lab" id="socLo">__LOW_PCT__%</div><div class="soc-lab" id="socHi">__HIGH_PCT__%</div>
 </div>
 <div class="soc-ends"><span>0%</span><span>100%</span></div></div></div>''',
-    "seek": r
+    "seek": r'''
 if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
 var els=document.querySelectorAll(sel);var ready=(!document.fonts)||document.fonts.status==='loaded';
 for(var i=0;i<els.length;i++){var el=els[i];
@@ -62,4 +62,5 @@ ehi.style.left=(hiF*track-70)+'px';
 elo.style.opacity=easeOutCubic(clamp((t-0.5)/1.0));
 // The high label fades in as the bar arrives at the end (2.0s to 3.0s)
 ehi.style.opacity=easeOutCubic(clamp((t-2.0)/1.0));
+'''
 }
