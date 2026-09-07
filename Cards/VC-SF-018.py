@@ -6,7 +6,7 @@ CARD = {
     "css": r'''.ig-wrap{position:absolute;left:96px;top:0;width:888px;height:100%;display:flex;flex-direction:column;justify-content:center;}
 .ig-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px;}
 .ig-cell{background:rgba(10,22,40,.55);border:1px solid rgba(0,212,170,.3);border-radius:20px;padding:44px 30px;display:flex;flex-direction:column;align-items:center;gap:24px;text-align:center;opacity:0;transform:translateY(38px);}
-.ig-mark{width:70px;height:70px;border-radius:18px;background:rgba(0,212,170,.15);border:2px solid #00D4AA;display:flex;align-items:center;justify-content:center;color:#00D4AA;font-family:'Space Grotesk';font-weight:700;font-size:40px;}
+.ig-mark{width:70px;height:70px;border-radius:18px;background:rgba(0,212,170,.15);border:2px solid #00D4AA;display:flex;align-items:center;justify-content:center;}
 .ig-t{font-family:'Space Grotesk';font-weight:600;font-size:44px;color:#FFFFFF;line-height:1.15;}
 
 /* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
@@ -16,10 +16,10 @@ CARD = {
 #axsafe{position:absolute;left:0;top:0;width:1080px;height:1920px;transform:translateY(235px);}
 ''',
     "body": r'''<div id="axsafe"><div class="ig-wrap"><div class="ig-grid">
-<div class="ig-cell" id="ig1"><div class="ig-mark">&#9889;</div><div class="ig-t">__ITEM1__</div></div>
-<div class="ig-cell" id="ig2"><div class="ig-mark">&#9889;</div><div class="ig-t">__ITEM2__</div></div>
-<div class="ig-cell" id="ig3"><div class="ig-mark">&#9889;</div><div class="ig-t">__ITEM3__</div></div>
-<div class="ig-cell" id="ig4"><div class="ig-mark">&#9889;</div><div class="ig-t">__ITEM4__</div></div></div></div></div>''',
+<div class="ig-cell" id="ig1"><div class="ig-mark"><svg width="32" height="32" viewBox="0 0 24 24" fill="#00D4AA"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div class="ig-t">__ITEM1__</div></div>
+<div class="ig-cell" id="ig2"><div class="ig-mark"><svg width="32" height="32" viewBox="0 0 24 24" fill="#00D4AA"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div class="ig-t">__ITEM2__</div></div>
+<div class="ig-cell" id="ig3"><div class="ig-mark"><svg width="32" height="32" viewBox="0 0 24 24" fill="#00D4AA"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div class="ig-t">__ITEM3__</div></div>
+<div class="ig-cell" id="ig4"><div class="ig-mark"><svg width="32" height="32" viewBox="0 0 24 24" fill="#00D4AA"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div class="ig-t">__ITEM4__</div></div></div></div></div>''',
     "seek": r'''
 var x=(typeof x!=='undefined'&&x>0)?x:4;
 var HOLD=1,ENTER=0.5;
