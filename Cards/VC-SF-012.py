@@ -16,8 +16,11 @@ CARD = {
 /* ax caption-safe v3: center ~y920, clamp bottom<=1340 (repo band bottom=1540) */
 #axsafe{position:absolute;left:0;top:0;width:1080px;height:1920px;transform:translateY(233px);}
 ''',
-    "body": r'''<div id="axsafe"><div class="soc-wrap"><div class="soc-cap" id="socCap">__CAPTION__</div>
-<div class="soc-track"><div class="soc-fill" id="socFill"></div><div class="soc-lab" id="socLo">__LOW_PCT__%</div><div class="soc-lab" id="socHi">__HIGH_PCT__%</div></div>
+   "body": r'''<div id="axsafe"><div class="soc-wrap"><div class="soc-cap" id="socCap">__CAPTION__</div>
+<div style="position:relative; width:820px;">
+<div class="soc-track"><div class="soc-fill" id="socFill"></div></div>
+<div class="soc-lab" id="socLo">__LOW_PCT__%</div><div class="soc-lab" id="socHi">__HIGH_PCT__%</div>
+</div>
 <div class="soc-ends"><span>0%</span><span>100%</span></div></div></div>''',
     "seek": r'''
 if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
@@ -36,12 +39,27 @@ __fit(".soc-cap",820,180,0,1);__fit(".soc-lab",110,0,1,0);
 function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.opacity=e;el.style.transform='translateY('+(dy*(1-e))+'px)';}}
 function grow(id,a,b){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.transform='scaleX('+e+')';}}
 show('socCap',0.1,0.85,28);
+
 var lo=parseFloat(('__LOW_PCT__'.match(/[\d.]+/)||[20])[0]);var hi=parseFloat(('__HIGH_PCT__'.match(/[\d.]+/)||[80])[0]);
-// NOTE: preview substitutes real values; renderer fills the slots before this runs.
-var fill=document.getElementById('socFill');var track=820;
-var loF=lo/100, hiF=hi/100;var e=easeOutCubic(clamp((t-0.7)/0.9));
-fill.style.left=(loF*track)+'px';fill.style.width=(track*(hiF-loF))+'px';fill.style.transform='scaleX('+e+')';fill.style.transformOrigin='left';
-var elo=document.getElementById('socLo'),ehi=document.getElementById('socHi');
-elo.style.left=(loF*track-10)+'px';ehi.style.left=(hiF*track-70)+'px';
-elo.style.opacity=easeOutCubic(clamp((t-1.4)/0.5));ehi.style.opacity=easeOutCubic(clamp((t-1.6)/0.5));''',
+
+// RESTORED VARIABLES:
+var fill=document.getElementById('socFill');
+var track=820;
+var loF=lo/100, hiF=hi/100;
+
+// Bar starts at 0.5s and takes 2.5s to grow (finishes exactly at 3.0s)
+var e=easeOutCubic(clamp((t-0.5)/2.5));
+fill.style.left=(loF*track)+'px';
+fill.style.width=(track*(hiF-loF))+'px';
+fill.style.transform='scaleX('+e+')';
+fill.style.transformOrigin='left';
+
+var elo=document.getElementById('socLo'), ehi=document.getElementById('socHi');
+elo.style.left=(loF*track-10)+'px';
+ehi.style.left=(hiF*track-70)+'px';
+
+// The low label fades in as the bar starts (0.5s to 1.5s)
+elo.style.opacity=easeOutCubic(clamp((t-0.5)/1.0));
+// The high label fades in as the bar arrives at the end (2.0s to 3.0s)
+ehi.style.opacity=easeOutCubic(clamp((t-2.0)/1.0));
 }
