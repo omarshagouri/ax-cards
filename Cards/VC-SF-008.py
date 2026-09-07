@@ -10,7 +10,7 @@ CARD = {
 .elim-head{font-family:'Space Grotesk';font-weight:700;font-size:44px;letter-spacing:.04em;opacity:0;transform:translateY(24px);}
 .elim-item{margin-top:34px;font-family:'Space Grotesk';font-weight:700;font-size:64px;line-height:1.12;color:#FFFFFF;opacity:0;transform:translateY(30px);}
 .elim-ok{color:#00D4AA;} .elim-no{color:#FF7A3C;}
-.elim-rule{width:260px;height:4px;background:#00D4AA;border-radius:2px;margin-top:56px;transform:scaleX(0);transform-origin:center;}
+.elim-rule{width:400px;height:8px;background:#00D4AA;border-radius:4px;margin-top:56px;transform:scaleX(0);transform-origin:center;}
 
 /* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
 .elim-wrap{top:192px !important;height:988px !important;}
