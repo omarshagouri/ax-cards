@@ -5,7 +5,7 @@ CARD = {
     "default_duration": 4.0,
     "css": r'''.def-wrap{position:absolute;left:96px;top:0;width:888px;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
 .def-term{font-family:'Space Grotesk';font-weight:700;font-size:104px;color:#00D4AA;opacity:0;transform:translateY(30px);}
-.def-eq{width:120px;height:4px;background:#8CA0B8;opacity:0;margin:36px 0;transform:scaleX(0);transform-origin:center;}
+.def-eq{width:400px;height:8px;background:#00D4AA;border-radius:4px;opacity:0;margin:36px 0;transform:scaleX(0);transform-origin:center;}
 .def-body{font-family:'Space Grotesk';font-weight:600;font-size:62px;line-height:1.2;color:#FFFFFF;opacity:0;transform:translateY(30px);}
 
 /* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
