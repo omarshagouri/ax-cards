@@ -43,15 +43,21 @@ for(var i=1;i<=4;i++){var el=document.getElementById('li'+i);if(!el)continue;var
 var rev=parseInt(('__REVEAL__'.match(/\d+/)||[''])[0],10);
 var noRev=isNaN(rev);
 var n=noRev?filled.length:rev;
-show('lH', 0.10, 0.50, 28);
+show('lH', 0.10, 0.60, 28);
 var k = 0;
 var totalItems = filled.length || 1;
+
+// Each item takes 0.8s to fade in. We space them out so the final item ends at exactly 4.0s.
+var itemDuration = 0.8; 
+var stagger = totalItems > 1 ? (4.0 - 0.6 - itemDuration) / (totalItems - 1) : 0;
+
 for(var j = 0; j < filled.length; j++){
   var i = filled[j], el = document.getElementById('li'+i);
   if(i > n){ el.style.display = 'none'; continue; }
+  
   if(noRev){
-    var startTime = 0.6 + (k * (3.0 / totalItems));
-    var endTime = startTime + 0.6;
+    var startTime = 0.6 + (k * stagger);
+    var endTime = startTime + itemDuration;
     show('li'+i, startTime, endTime, 30);
     k++;
   }
