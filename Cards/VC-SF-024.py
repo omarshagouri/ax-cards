@@ -24,7 +24,11 @@ CARD = {
 </svg><div class="cl-yl">__Y_LABEL__</div><div class="cl-xl">__X_LABEL__</div></div>
 <div class="cl-anno" id="clAnno">__ANNOTATION__</div></div></div>''',
     "seek": r'''
-var x=(typeof x!=='undefined'&&x>0)?x:4;if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
+var x=(typeof x!=='undefined'&&x>0)?x:4;
+var HOLD=1,ENTER=0.5;
+function S(i,N){return N<2?0.12*x:0.12*x+(i/(N-1))*((x-HOLD-ENTER)-0.12*x);}
+function E(i,N){return N<2?Math.min(x-HOLD,0.12*x+0.6):S(i,N)+ENTER;}
+if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
 var els=document.querySelectorAll(sel);var ready=(!document.fonts)||document.fonts.status==='loaded';
 for(var i=0;i<els.length;i++){var el=els[i];
 if(el.dataset.fitok==='1'){el.style.fontSize=el.dataset.fitpx+'px';continue;}
@@ -39,7 +43,7 @@ if(ready){el.dataset.fitpx=size;el.dataset.fitok='1';}}
 __fit(".cl-title",888,140,0,1);__fit(".cl-anno",888,180,0,1);
 function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.opacity=e;el.style.transform='translateY('+(dy*(1-e))+'px)';}}
 function grow(id,a,b){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.transform='scaleX('+e+')';}}
-show('clTitle',0.12*x,0.324*x,24);
-var p=document.getElementById('clPath');if(p){var len=p.getTotalLength?p.getTotalLength():500;p.style.strokeDasharray=len;var e=easeOutCubic(clamp((t-0.266*x)/(0.438*x)));p.style.strokeDashoffset=len*(1-e);}
-show('clAnno',0.646*x,0.85*x,22);''',
+show('clTitle',S(0,3),E(0,3),24);
+var p=document.getElementById('clPath');if(p){var len=p.getTotalLength?p.getTotalLength():500;p.style.strokeDasharray=len;var e=easeOutCubic(clamp((t-S(1,3))/(E(1,3)-S(1,3))));p.style.strokeDashoffset=len*(1-e);}
+show('clAnno',S(2,3),E(2,3),22);''',
 }

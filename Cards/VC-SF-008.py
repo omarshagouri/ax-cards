@@ -25,7 +25,11 @@ CARD = {
 <div class="elim-col"><div class="elim-head elim-no" id="eH2">__WRONG_LABEL__<svg class="hd-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></div><div class="elim-item" id="eI2">__WRONG_ITEM__</div></div></div>
 <div class="elim-rule" id="eRule"></div></div></div>''',
     "seek": r'''
-var x=(typeof x!=='undefined'&&x>0)?x:4;if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
+var x=(typeof x!=='undefined'&&x>0)?x:4;
+var HOLD=1,ENTER=0.5;
+function S(i,N){return N<2?0.12*x:0.12*x+(i/(N-1))*((x-HOLD-ENTER)-0.12*x);}
+function E(i,N){return N<2?Math.min(x-HOLD,0.12*x+0.6):S(i,N)+ENTER;}
+if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
 var els=document.querySelectorAll(sel);var ready=(!document.fonts)||document.fonts.status==='loaded';
 for(var i=0;i<els.length;i++){var el=els[i];
 if(el.dataset.fitok==='1'){el.style.fontSize=el.dataset.fitpx+'px';continue;}
@@ -40,6 +44,6 @@ if(ready){el.dataset.fitpx=size;el.dataset.fitok='1';}}
 __fit(".elim-head",380,0,1,1);__fit(".elim-item",380,380,0,1);
 function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.opacity=e;el.style.transform='translateY('+(dy*(1-e))+'px)';}}
 function grow(id,a,b){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.transform='scaleX('+e+')';}}
-var d=easeOutCubic(clamp((t-0.12*x)/(0.146*x)));document.getElementById('eDiv').style.transform='translateX(-1px) scaleY('+d+')';
-show('eH1',0.193*x,0.368*x,24);show('eI1',0.295*x,0.485*x,30);show('eH2',0.368*x,0.543*x,24);show('eI2',0.47*x,0.66*x,30);grow('eRule',0.646*x,0.85*x);''',
+var d=easeOutCubic(clamp((t-S(0,6))/(E(0,6)-S(0,6))));document.getElementById('eDiv').style.transform='translateX(-1px) scaleY('+d+')';
+show('eH1',S(1,6),E(1,6),24);show('eI1',S(2,6),E(2,6),30);show('eH2',S(3,6),E(3,6),24);show('eI2',S(4,6),E(4,6),30);grow('eRule',S(5,6),E(5,6));''',
 }

@@ -26,7 +26,8 @@ CARD = {
 <div class="tl-pt" id="tp4" style="left:92%"><div class="tl-dot"></div><div class="tl-yr">__P4_YEAR__</div><div class="tl-lb">__P4_LABEL__</div></div>
 </div></div></div></div>''',
     "seek": r'''
-var x=(typeof x!=='undefined'&&x>0)?x:4;if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
+var x=(typeof x!=='undefined'&&x>0)?x:4;var HOLD=1,ENTER=0.5;function S(i,N){return N<2?0.12*x:0.12*x+(i/(N-1))*((x-HOLD-ENTER)-0.12*x);}function E(i,N){return N<2?Math.min(x-HOLD,0.12*x+0.6):S(i,N)+ENTER;}
+if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
 var els=document.querySelectorAll(sel);var ready=(!document.fonts)||document.fonts.status==='loaded';
 for(var i=0;i<els.length;i++){var el=els[i];
 if(el.dataset.fitok==='1'){el.style.fontSize=el.dataset.fitpx+'px';continue;}
@@ -42,6 +43,6 @@ __fit(".tl-yr",200,0,1,0);__fit(".tl-lb",230,150,0,0);
 function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.opacity=e;el.style.transform='translateY('+(dy*(1-e))+'px)';}}
 function grow(id,a,b){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.transform='scaleX('+e+')';}}
 ['tp1','tp2','tp3','tp4'].forEach(function(id){var el=document.getElementById(id);if(el&&el.textContent.indexOf('__')>-1){el.style.display='none';}});
-grow('tlProg',0.12*x,0.663*x);
-show('tp1',0.188*x,0.392*x,18);show('tp2',0.341*x,0.544*x,18);show('tp3',0.493*x,0.697*x,18);show('tp4',0.646*x,0.85*x,18);''',
+var N=4;grow('tlProg',S(0,N),E(3,N));
+show('tp1',S(0,N),E(0,N),18);show('tp2',S(1,N),E(1,N),18);show('tp3',S(2,N),E(2,N),18);show('tp4',S(3,N),E(3,N),18);''',
 }

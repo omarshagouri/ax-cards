@@ -15,7 +15,11 @@ CARD = {
 ''',
     "body": r'''<div id="axsafe"><div class="beat-wrap"><div class="beat-line" id="beatLine">__BEAT_LINE__</div><div class="beat-rule" id="beatRule"></div></div></div>''',
     "seek": r'''
-var x=(typeof x!=='undefined'&&x>0)?x:4;if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
+var x=(typeof x!=='undefined'&&x>0)?x:4;
+var HOLD=1,ENTER=0.5;
+function S(i,N){return N<2?0.12*x:0.12*x+(i/(N-1))*((x-HOLD-ENTER)-0.12*x);}
+function E(i,N){return N<2?Math.min(x-HOLD,0.12*x+0.6):S(i,N)+ENTER;}
+if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
 var els=document.querySelectorAll(sel);var ready=(!document.fonts)||document.fonts.status==='loaded';
 for(var i=0;i<els.length;i++){var el=els[i];
 if(el.dataset.fitok==='1'){el.style.fontSize=el.dataset.fitpx+'px';continue;}
@@ -30,5 +34,5 @@ if(ready){el.dataset.fitpx=size;el.dataset.fitok='1';}}
 __fit(".beat-line",888,700,0,1);
 function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.opacity=e;el.style.transform='translateY('+(dy*(1-e))+'px)';}}
 function grow(id,a,b){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.transform='scaleX('+e+')';}}
-show('beatLine',0.12*x,0.402*x,38);grow('beatRule',0.336*x,0.85*x);''',
+show('beatLine',S(0,2),E(0,2),38);grow('beatRule',S(1,2),E(1,2));''',
 }

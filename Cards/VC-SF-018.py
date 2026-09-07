@@ -21,7 +21,11 @@ CARD = {
 <div class="ig-cell" id="ig3"><div class="ig-mark">&#9889;</div><div class="ig-t">__ITEM3__</div></div>
 <div class="ig-cell" id="ig4"><div class="ig-mark">&#9889;</div><div class="ig-t">__ITEM4__</div></div></div></div></div>''',
     "seek": r'''
-var x=(typeof x!=='undefined'&&x>0)?x:4;if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
+var x=(typeof x!=='undefined'&&x>0)?x:4;
+var HOLD=1,ENTER=0.5;
+function S(i,N){return N<2?0.12*x:0.12*x+(i/(N-1))*((x-HOLD-ENTER)-0.12*x);}
+function E(i,N){return N<2?Math.min(x-HOLD,0.12*x+0.6):S(i,N)+ENTER;}
+if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
 var els=document.querySelectorAll(sel);var ready=(!document.fonts)||document.fonts.status==='loaded';
 for(var i=0;i<els.length;i++){var el=els[i];
 if(el.dataset.fitok==='1'){el.style.fontSize=el.dataset.fitpx+'px';continue;}
@@ -37,5 +41,5 @@ __fit(".ig-t",320,170,0,1);
 function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.opacity=e;el.style.transform='translateY('+(dy*(1-e))+'px)';}}
 function grow(id,a,b){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.transform='scaleX('+e+')';}}
 ['ig1','ig2','ig3','ig4'].forEach(function(id){var el=document.getElementById(id);if(el&&el.querySelector('.ig-t').textContent.indexOf('__')>-1){el.style.display='none';}});
-show('ig1',0.12*x,0.412*x,38);show('ig2',0.266*x,0.558*x,38);show('ig3',0.412*x,0.704*x,38);show('ig4',0.558*x,0.85*x,38);''',
+show('ig1',S(0,4),E(0,4),38);show('ig2',S(1,4),E(1,4),38);show('ig3',S(2,4),E(2,4),38);show('ig4',S(3,4),E(3,4),38);''',
 }

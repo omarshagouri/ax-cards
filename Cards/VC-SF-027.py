@@ -8,8 +8,8 @@ CARD = {
     "seek": r"""
 var x=(typeof x!=='undefined'&&x>0)?x:4;function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.opacity=e;el.style.transform='translateY('+(dy*(1-e))+'px)';}}
 function grow(id,a,b){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.transform='scaleX('+e+')';}}
-var e=easeOutCubic(clamp((t-0.12*x)/(0.23*x)));var xel=document.getElementById('stingX');
+var e=easeOutCubic(clamp((t-0.12*x)/0.6));var xel=document.getElementById('stingX');
 xel.style.opacity=Math.min(1,e*1.2);xel.style.transform='scale('+(0.6+0.4*e)+')';
-var glow=40+80*Math.sin(clamp((t-0.12*x)/(0.5*x))*Math.PI);xel.style.textShadow='0 0 '+glow+'px rgba(0,212,170,'+(0.4+0.4*e)+')';
-if(t>0.7*x){var f=clamp((t-0.7*x)/(0.27*x));xel.style.opacity=(1-f);}""",
+var glow=40+80*Math.sin(clamp((t-0.12*x)/0.9)*Math.PI);xel.style.textShadow='0 0 '+glow+'px rgba(0,212,170,'+(0.4+0.4*e)+')';
+""",
 }

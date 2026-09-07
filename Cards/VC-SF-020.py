@@ -12,7 +12,11 @@ CARD = {
 ''',
     "body": r'''<div id="axsafe"><div class="tag-chip" id="tagChip"><div class="tag-dot"></div><div class="tag-t">__TAG_TEXT__</div></div></div>''',
     "seek": r'''
-var x=(typeof x!=='undefined'&&x>0)?x:4;if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
+var x=(typeof x!=='undefined'&&x>0)?x:4;
+var HOLD=1,ENTER=0.5;
+function S(i,N){return N<2?0.12*x:0.12*x+(i/(N-1))*((x-HOLD-ENTER)-0.12*x);}
+function E(i,N){return N<2?Math.min(x-HOLD,0.12*x+0.6):S(i,N)+ENTER;}
+if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
 var els=document.querySelectorAll(sel);var ready=(!document.fonts)||document.fonts.status==='loaded';
 for(var i=0;i<els.length;i++){var el=els[i];
 if(el.dataset.fitok==='1'){el.style.fontSize=el.dataset.fitpx+'px';continue;}
@@ -27,5 +31,5 @@ if(ready){el.dataset.fitpx=size;el.dataset.fitok='1';}}
 __fit(".tag-t",700,0,1,0);
 function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.opacity=e;el.style.transform='translateY('+(dy*(1-e))+'px)';}}
 function grow(id,a,b){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.transform='scaleX('+e+')';}}
-var e=easeOutCubic(clamp((t-0.12*x)/(0.33*x)));var c=document.getElementById('tagChip');c.style.opacity=e;c.style.transform='translateX('+(-30*(1-e))+'px)';''',
+var e=easeOutCubic(clamp((t-S(0,1))/(E(0,1)-S(0,1))));var c=document.getElementById('tagChip');c.style.opacity=e;c.style.transform='translateX('+(-30*(1-e))+'px)';''',
 }

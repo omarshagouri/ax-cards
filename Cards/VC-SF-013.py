@@ -21,7 +21,11 @@ CARD = {
 <div class="g-lab" id="gLab">__METRIC_LABEL__</div>
 <div class="src" id="gSrc"><div class="src-bar"></div><div class="src-txt">SOURCE: __SOURCE__</div></div></div></div>''',
     "seek": r'''
-var x=(typeof x!=='undefined'&&x>0)?x:4;if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
+var x=(typeof x!=='undefined'&&x>0)?x:4;
+var HOLD=1,ENTER=0.5;
+function S(i,N){return N<2?0.12*x:0.12*x+(i/(N-1))*((x-HOLD-ENTER)-0.12*x);}
+function E(i,N){return N<2?Math.min(x-HOLD,0.12*x+0.6):S(i,N)+ENTER;}
+if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
 var els=document.querySelectorAll(sel);var ready=(!document.fonts)||document.fonts.status==='loaded';
 for(var i=0;i<els.length;i++){var el=els[i];
 if(el.dataset.fitok==='1'){el.style.fontSize=el.dataset.fitpx+'px';continue;}
@@ -38,13 +42,13 @@ function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.
 function grow(id,a,b){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.transform='scaleX('+e+')';}}
 var cv=document.getElementById('gCanvas');var ctx=cv.getContext('2d');var cx=260,cy=260,r=210;
 var full=parseFloat(('__VALUE__'.match(/[\d.]+/)||[0])[0]);
-var e=easeOutCubic(clamp((t-0.12*x)/(0.412*x)));var frac=(full/100)*e;
+var e=easeOutCubic(clamp((t-S(0,4))/(E(0,4)-S(0,4))));var frac=(full/100)*e;
 ctx.clearRect(0,0,520,520);ctx.lineWidth=34;ctx.lineCap='round';
 ctx.strokeStyle='rgba(140,160,184,0.20)';ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.stroke();
 ctx.strokeStyle='#00D4AA';ctx.beginPath();ctx.arc(cx,cy,r,-Math.PI/2,-Math.PI/2+frac*Math.PI*2);ctx.stroke();
-var gv=document.getElementById('gVal');gv.style.opacity=easeOutCubic(clamp((t-0.251*x)/(0.225*x)));
+var gv=document.getElementById('gVal');gv.style.opacity=easeOutCubic(clamp((t-S(1,4))/(E(1,4)-S(1,4))));
 if(!gv.dataset.full){gv.dataset.full=gv.textContent;}
 var num=(full*e);var suf=gv.dataset.full.replace(/[\d.\s]/g,'');gv.textContent=(Math.round(num))+suf;
-show('gLab',0.476*x,0.7*x,24);
-var s=document.getElementById('gSrc');if(s){var ok=s.textContent.indexOf('__')<0 && s.textContent.replace('SOURCE:','').trim().length>0;s.style.opacity=ok?easeOutCubic(clamp((t-0.625*x)/(0.225*x))):0;}''',
+show('gLab',S(2,4),E(2,4),24);
+var s=document.getElementById('gSrc');if(s){var ok=s.textContent.indexOf('__')<0 && s.textContent.replace('SOURCE:','').trim().length>0;s.style.opacity=ok?easeOutCubic(clamp((t-S(3,4))/(E(3,4)-S(3,4)))):0;}''',
 }

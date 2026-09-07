@@ -55,7 +55,11 @@ CARD = {
         <div id="source">__SOURCE__</div>
     </div>''',
     "seek": r'''
-var x=(typeof x!=='undefined'&&x>0)?x:4;if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
+var x=(typeof x!=='undefined'&&x>0)?x:4;
+var HOLD=1,ENTER=0.5;
+function S(i,N){return N<2?0.12*x:0.12*x+(i/(N-1))*((x-HOLD-ENTER)-0.12*x);}
+function E(i,N){return N<2?Math.min(x-HOLD,0.12*x+0.6):S(i,N)+ENTER;}
+if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
 var els=document.querySelectorAll(sel);var ready=(!document.fonts)||document.fonts.status==='loaded';
 for(var i=0;i<els.length;i++){var el=els[i];
 if(el.dataset.fitok==='1'){el.style.fontSize=el.dataset.fitpx+'px';continue;}
@@ -86,14 +90,14 @@ __fit("#title",1000,180,0,1);__fit(".val",220,0,1,1);__fit(".axis",360,0,1,1);__
         title.style.opacity=te;
         title.style.transform='translateY('+(30*(1-te))+'px)';
 
-        var fe=clamp((t-0.12*x)/(0.281*x));
+        var fe=clamp((t-S(0,3))/(E(0,3)-S(0,3)));
         labA.style.opacity=fe; labB.style.opacity=fe; source.style.opacity=fe;
 
-        var ge=easeOutCubic(clamp((t-0.176*x)/(0.449*x)));
+        var ge=easeOutCubic(clamp((t-S(1,3))/(E(1,3)-S(1,3))));
         barA.style.transform='scaleY('+ge+')';
         barB.style.transform='scaleY('+ge+')';
 
-        var ve=easeOutCubic(clamp((t-0.625*x)/(0.225*x)));
+        var ve=easeOutCubic(clamp((t-S(2,3))/(E(2,3)-S(2,3))));
         valA.style.opacity=ve; valB.style.opacity=ve;
         valA.style.transform='translateY('+(18*(1-ve))+'px)';
         valB.style.transform='translateY('+(18*(1-ve))+'px)';

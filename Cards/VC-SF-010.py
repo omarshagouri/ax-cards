@@ -20,7 +20,11 @@ CARD = {
 <div class="col" id="c2"><div class="col-t">__COL2_TITLE__</div><div class="col-bar"></div><div class="col-p">__COL2_POINT__</div></div>
 <div class="col" id="c3"><div class="col-t">__COL3_TITLE__</div><div class="col-bar"></div><div class="col-p">__COL3_POINT__</div></div></div></div>''',
     "seek": r'''
-var x=(typeof x!=='undefined'&&x>0)?x:4;if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
+var x=(typeof x!=='undefined'&&x>0)?x:4;
+var HOLD=1,ENTER=0.5;
+function S(i,N){return N<2?0.12*x:0.12*x+(i/(N-1))*((x-HOLD-ENTER)-0.12*x);}
+function E(i,N){return N<2?Math.min(x-HOLD,0.12*x+0.6):S(i,N)+ENTER;}
+if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
 var els=document.querySelectorAll(sel);var ready=(!document.fonts)||document.fonts.status==='loaded';
 for(var i=0;i<els.length;i++){var el=els[i];
 if(el.dataset.fitok==='1'){el.style.fontSize=el.dataset.fitpx+'px';continue;}
@@ -36,5 +40,5 @@ __fit(".col-t",224,0,1,1);__fit(".col-p",224,240,0,1);
 function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.opacity=e;el.style.transform='translateY('+(dy*(1-e))+'px)';}}
 function grow(id,a,b){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.transform='scaleX('+e+')';}}
 ['c1','c2','c3'].forEach(function(id){var el=document.getElementById(id);if(el&&el.textContent.indexOf('__')>-1){el.style.display='none';}});
-show('c1',0.12*x,0.452*x,40);show('c2',0.319*x,0.651*x,40);show('c3',0.518*x,0.85*x,40);''',
+show('c1',S(0,3),E(0,3),40);show('c2',S(1,3),E(1,3),40);show('c3',S(2,3),E(2,3),40);''',
 }

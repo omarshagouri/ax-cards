@@ -21,7 +21,8 @@ CARD = {
 <div class="li" id="li3"><div class="li-n">3</div><div class="li-t">__ITEM3__</div></div>
 <div class="li" id="li4"><div class="li-n">4</div><div class="li-t">__ITEM4__</div></div></div></div>''',
     "seek": r'''
-var x=(typeof x!=='undefined'&&x>0)?x:4;if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
+var x=(typeof x!=='undefined'&&x>0)?x:4;var HOLD=1,ENTER=0.5;function S(i,N){return N<2?0.12*x:0.12*x+(i/(N-1))*((x-HOLD-ENTER)-0.12*x);}function E(i,N){return N<2?Math.min(x-HOLD,0.12*x+0.6):S(i,N)+ENTER;}
+if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
 var els=document.querySelectorAll(sel);var ready=(!document.fonts)||document.fonts.status==='loaded';
 for(var i=0;i<els.length;i++){var el=els[i];
 if(el.dataset.fitok==='1'){el.style.fontSize=el.dataset.fitpx+'px';continue;}
@@ -43,13 +44,13 @@ for(var i=1;i<=4;i++){var el=document.getElementById('li'+i);if(!el)continue;var
 var rev=parseInt(('__REVEAL__'.match(/\d+/)||[''])[0],10);
 var noRev=isNaN(rev);
 var n=noRev?filled.length:rev;
-show('lH',0.12*x,0.333*x,28);
+var N=1+filled.length;show('lH',S(0,N),E(0,N),28);
 var k=0;
 for(var j=0;j<filled.length;j++){var i=filled[j],el=document.getElementById('li'+i);
   if(i>n){el.style.display='none';continue;}
-  if(noRev){show('li'+i,(0.272+0.122*k)*x,(0.485+0.122*k)*x,30);k++;}      // no REVEAL: cascade all (unchanged)
+  if(noRev){show('li'+i,S(1+k,N),E(1+k,N),30);k++;}      // no REVEAL: cascade all (unchanged)
   else if(i<n){el.style.opacity='1';el.style.transform='none';}   // already-revealed items sit static
-  else{show('li'+i,0.227*x,0.439*x,30);}                          // the newest item animates in
+  else{show('li'+i,S(1,2),E(1,2),30);}                          // the newest item animates in
 }
 ''',
 }

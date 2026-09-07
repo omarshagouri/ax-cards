@@ -42,7 +42,11 @@ CARD = {
         </div>
     </div>''',
     "seek": r'''
-var x=(typeof x!=='undefined'&&x>0)?x:4;if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
+var x=(typeof x!=='undefined'&&x>0)?x:4;
+var HOLD=1,ENTER=0.5;
+function S(i,N){return N<2?0.12*x:0.12*x+(i/(N-1))*((x-HOLD-ENTER)-0.12*x);}
+function E(i,N){return N<2?Math.min(x-HOLD,0.12*x+0.6):S(i,N)+ENTER;}
+if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
 var els=document.querySelectorAll(sel);var ready=(!document.fonts)||document.fonts.status==='loaded';
 for(var i=0;i<els.length;i++){var el=els[i];
 if(el.dataset.fitok==='1'){el.style.fontSize=el.dataset.fitpx+'px';continue;}
@@ -67,16 +71,16 @@ __fit(".pill",800,0,1,1);__fit(".statement",840,600,0,1);__fit(".role",840,0,1,1
         pill.style.transform='scale('+(0.9+0.1*pe)+')';
 
         // statement: fade + rise, 0.4-1.1s
-        var se=easeOutCubic(clamp((t-0.12*x)/(0.319*x)));
+        var se=easeOutCubic(clamp((t-S(0,3))/(E(0,3)-S(0,3))));
         stmt.style.opacity=se;
         stmt.style.transform='translateY('+(24*(1-se))+'px)';
 
         // teal rule: grow from center, 1.0-1.6s
-        var re=easeOutCubic(clamp((t-0.394*x)/(0.274*x)));
+        var re=easeOutCubic(clamp((t-S(1,3))/(E(1,3)-S(1,3))));
         rule.style.transform='scaleX('+re+')';
 
         // role: fade + rise, 1.5-2.0s
-        var oe=easeOutCubic(clamp((t-0.622*x)/(0.228*x)));
+        var oe=easeOutCubic(clamp((t-S(2,3))/(E(2,3)-S(2,3))));
         role.style.opacity=oe;
         role.style.transform='translateY('+(16*(1-oe))+'px)';
     ''',

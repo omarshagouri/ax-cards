@@ -19,7 +19,11 @@ CARD = {
     "body": r'''<div id="axsafe"><div class="cost-wrap"><div class="cost-lab" id="coLab">__LABEL__</div><div class="cost-amt" id="coAmt">__AMOUNT__</div></div>
 <div class="src" id="coSrc"><div class="src-bar"></div><div class="src-txt">SOURCE: __SOURCE__</div></div></div>''',
     "seek": r'''
-var x=(typeof x!=='undefined'&&x>0)?x:4;if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
+var x=(typeof x!=='undefined'&&x>0)?x:4;
+var HOLD=1,ENTER=0.5;
+function S(i,N){return N<2?0.12*x:0.12*x+(i/(N-1))*((x-HOLD-ENTER)-0.12*x);}
+function E(i,N){return N<2?Math.min(x-HOLD,0.12*x+0.6):S(i,N)+ENTER;}
+if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
 var els=document.querySelectorAll(sel);var ready=(!document.fonts)||document.fonts.status==='loaded';
 for(var i=0;i<els.length;i++){var el=els[i];
 if(el.dataset.fitok==='1'){el.style.fontSize=el.dataset.fitpx+'px';continue;}
@@ -34,7 +38,7 @@ if(ready){el.dataset.fitpx=size;el.dataset.fitok='1';}}
 __fit(".cost-amt",940,0,1,1);__fit(".cost-lab",900,140,0,1);__fit(".src-txt",820,0,1,0);
 function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.opacity=e;el.style.transform='translateY('+(dy*(1-e))+'px)';}}
 function grow(id,a,b){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.transform='scaleX('+e+')';}}
-show('coLab',0.12*x,0.404*x,22);
-var e=easeOutCubic(clamp((t-0.302*x)/(0.284*x)));var a=document.getElementById('coAmt');a.style.opacity=e;a.style.transform='scale('+(0.85+0.15*e)+')';
-var s=document.getElementById('coSrc');if(s){var ok=s.textContent.indexOf('__')<0 && s.textContent.replace('SOURCE:','').trim().length>0;s.style.opacity=ok?easeOutCubic(clamp((t-0.607*x)/(0.243*x))):0;}''',
+show('coLab',S(0,3),E(0,3),22);
+var e=easeOutCubic(clamp((t-S(1,3))/(E(1,3)-S(1,3))));var a=document.getElementById('coAmt');a.style.opacity=e;a.style.transform='scale('+(0.85+0.15*e)+')';
+var s=document.getElementById('coSrc');if(s){var ok=s.textContent.indexOf('__')<0 && s.textContent.replace('SOURCE:','').trim().length>0;s.style.opacity=ok?easeOutCubic(clamp((t-S(2,3))/(E(2,3)-S(2,3)))):0;}''',
 }

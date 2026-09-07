@@ -20,7 +20,11 @@ CARD = {
 <div class="hb-batt"><div class="hb-seg hb-top" id="hbTop">buffer</div><div class="hb-seg hb-use" id="hbUse">__USABLE_PCT__ usable</div><div class="hb-seg hb-bot" id="hbBot">buffer</div></div>
 <div class="hb-legend" id="hbLeg">Teal is what you use. Orange is the hidden reserve.</div></div></div>''',
     "seek": r'''
-var x=(typeof x!=='undefined'&&x>0)?x:4;if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
+var x=(typeof x!=='undefined'&&x>0)?x:4;
+var HOLD=1,ENTER=0.5;
+function S(i,N){return N<2?0.12*x:0.12*x+(i/(N-1))*((x-HOLD-ENTER)-0.12*x);}
+function E(i,N){return N<2?Math.min(x-HOLD,0.12*x+0.6):S(i,N)+ENTER;}
+if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
 var els=document.querySelectorAll(sel);var ready=(!document.fonts)||document.fonts.status==='loaded';
 for(var i=0;i<els.length;i++){var el=els[i];
 if(el.dataset.fitok==='1'){el.style.fontSize=el.dataset.fitpx+'px';continue;}
@@ -35,10 +39,10 @@ if(ready){el.dataset.fitpx=size;el.dataset.fitok='1';}}
 __fit(".hb-cap",900,180,0,1);__fit(".hb-use",0,0,1,0);
 function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.opacity=e;el.style.transform='translateY('+(dy*(1-e))+'px)';}}
 function grow(id,a,b){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.transform='scaleX('+e+')';}}
-show('hbCap',0.12*x,0.339*x,24);
+show('hbCap',S(0,5),E(0,5),24);
 var top=parseFloat(('__TOP_BUFFER__'.match(/[\d.]+/)||[8])[0]);var bot=parseFloat(('__BOTTOM_BUFFER__'.match(/[\d.]+/)||[4])[0]);var use=parseFloat(('__USABLE_PCT__'.match(/[\d.]+/)||[88])[0]);
-var e1=easeOutCubic(clamp((t-0.295*x)/(0.146*x)));document.getElementById('hbTop').style.height=(e1*top)+'%';
-var e2=easeOutCubic(clamp((t-0.412*x)/(0.234*x)));document.getElementById('hbUse').style.height=(e2*use)+'%';
-var e3=easeOutCubic(clamp((t-0.587*x)/(0.146*x)));document.getElementById('hbBot').style.height=(e3*bot)+'%';
-document.getElementById('hbLeg').style.opacity=easeOutCubic(clamp((t-0.675*x)/(0.175*x)));''',
+var e1=easeOutCubic(clamp((t-S(1,5))/(E(1,5)-S(1,5))));document.getElementById('hbTop').style.height=(e1*top)+'%';
+var e2=easeOutCubic(clamp((t-S(2,5))/(E(2,5)-S(2,5))));document.getElementById('hbUse').style.height=(e2*use)+'%';
+var e3=easeOutCubic(clamp((t-S(3,5))/(E(3,5)-S(3,5))));document.getElementById('hbBot').style.height=(e3*bot)+'%';
+document.getElementById('hbLeg').style.opacity=easeOutCubic(clamp((t-S(4,5))/(E(4,5)-S(4,5))));''',
 }

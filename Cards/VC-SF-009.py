@@ -22,7 +22,11 @@ CARD = {
     "body": r'''<div id="axsafe"><div class="mf-wrap"><div class="mf-tag mf-myth-tag" id="mfT1">The myth</div><div class="mf-myth" id="mfMyth">__MYTH_LINE__</div><div class="mf-gap"></div><div class="mf-tag mf-fact-tag" id="mfT2">The data</div><div class="mf-fact" id="mfFact">__FACT_LINE__</div></div>
 <div class="src" id="mfSrc"><div class="src-bar"></div><div class="src-txt">SOURCE: __SOURCE__</div></div></div>''',
     "seek": r'''
-var x=(typeof x!=='undefined'&&x>0)?x:4;if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
+var x=(typeof x!=='undefined'&&x>0)?x:4;
+var HOLD=1,ENTER=0.5;
+function S(i,N){return N<2?0.12*x:0.12*x+(i/(N-1))*((x-HOLD-ENTER)-0.12*x);}
+function E(i,N){return N<2?Math.min(x-HOLD,0.12*x+0.6):S(i,N)+ENTER;}
+if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
 var els=document.querySelectorAll(sel);var ready=(!document.fonts)||document.fonts.status==='loaded';
 for(var i=0;i<els.length;i++){var el=els[i];
 if(el.dataset.fitok==='1'){el.style.fontSize=el.dataset.fitpx+'px';continue;}
@@ -37,6 +41,6 @@ if(ready){el.dataset.fitpx=size;el.dataset.fitok='1';}}
 __fit(".mf-myth",888,300,0,0);__fit(".mf-fact",888,320,0,0);__fit(".src-txt",820,0,1,0);
 function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.opacity=e;el.style.transform='translateY('+(dy*(1-e))+'px)';}}
 function grow(id,a,b){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.transform='scaleX('+e+')';}}
-show('mfT1',0.12*x,0.288*x,20);show('mfMyth',0.204*x,0.415*x,28);show('mfT2',0.415*x,0.569*x,20);show('mfFact',0.499*x,0.724*x,30);
-var s=document.getElementById('mfSrc');if(s){var st=(s.textContent.indexOf('__')<0 && s.textContent.replace('SOURCE:','').trim().length>0);s.style.opacity=st?easeOutCubic(clamp((t-0.682*x)/(0.168*x))):0;}''',
+show('mfT1',S(0,5),E(0,5),20);show('mfMyth',S(1,5),E(1,5),28);show('mfT2',S(2,5),E(2,5),20);show('mfFact',S(3,5),E(3,5),30);
+var s=document.getElementById('mfSrc');if(s){var st=(s.textContent.indexOf('__')<0 && s.textContent.replace('SOURCE:','').trim().length>0);s.style.opacity=st?easeOutCubic(clamp((t-S(4,5))/(E(4,5)-S(4,5)))):0;}''',
 }

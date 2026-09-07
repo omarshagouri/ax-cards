@@ -16,7 +16,11 @@ CARD = {
 ''',
     "body": r'''<div id="axsafe"><div class="def-wrap"><div class="def-term" id="defTerm">__TERM__</div><div class="def-eq" id="defEq"></div><div class="def-body" id="defBody">__DEFINITION__</div></div></div>''',
     "seek": r'''
-var x=(typeof x!=='undefined'&&x>0)?x:4;if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
+var x=(typeof x!=='undefined'&&x>0)?x:4;
+var HOLD=1,ENTER=0.5;
+function S(i,N){return N<2?0.12*x:0.12*x+(i/(N-1))*((x-HOLD-ENTER)-0.12*x);}
+function E(i,N){return N<2?Math.min(x-HOLD,0.12*x+0.6):S(i,N)+ENTER;}
+if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
 var els=document.querySelectorAll(sel);var ready=(!document.fonts)||document.fonts.status==='loaded';
 for(var i=0;i<els.length;i++){var el=els[i];
 if(el.dataset.fitok==='1'){el.style.fontSize=el.dataset.fitpx+'px';continue;}
@@ -31,7 +35,7 @@ if(ready){el.dataset.fitpx=size;el.dataset.fitok='1';}}
 __fit(".def-term",888,0,1,1);__fit(".def-body",888,520,0,1);
 function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.opacity=e;el.style.transform='translateY('+(dy*(1-e))+'px)';}}
 function grow(id,a,b){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.transform='scaleX('+e+')';}}
-show('defTerm',0.12*x,0.462*x,30);
-var e=easeOutCubic(clamp((t-0.348*x)/(0.228*x)));var eq=document.getElementById('defEq');eq.style.opacity=e;eq.style.transform='scaleX('+e+')';
-show('defBody',0.508*x,0.85*x,30);''',
+show('defTerm',S(0,3),E(0,3),30);
+var e=easeOutCubic(clamp((t-S(1,3))/(E(1,3)-S(1,3))));var eq=document.getElementById('defEq');eq.style.opacity=e;eq.style.transform='scaleX('+e+')';
+show('defBody',S(2,3),E(2,3),30);''',
 }
