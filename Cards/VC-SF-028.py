@@ -11,13 +11,13 @@ CARD = {
 .tc-veil{ position:absolute; inset:0; background:
     linear-gradient(180deg, rgba(10,22,40,.72) 0%, rgba(10,22,40,.30) 22%,
       rgba(10,22,40,.00) 42%, rgba(10,22,40,.00) 60%, rgba(10,22,40,.55) 84%, rgba(10,22,40,.90) 100%); }
-.tc-top{ position:absolute; top:180px; left:96px; width:840px; display:flex; flex-direction:column; gap:24px; }
-.tc-series{ margin:0; font-family:'Space Mono', monospace; font-weight:400; font-size:38px;
+.tc-top{ position:absolute; top:96px; left:72px; width:600px; display:flex; flex-direction:column; gap:16px; }
+.tc-series{ margin:0; font-family:'Space Mono', monospace; font-weight:400; font-size:28px;
             letter-spacing:4px; color:#b3c6d7; text-transform:uppercase; text-shadow:0 2px 20px rgba(0,0,0,.5); }
-.tc-head{ margin:0; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:104px;
-          line-height:1.08; letter-spacing:-1px; color:#FFFFFF; text-shadow:0 4px 30px rgba(0,0,0,.5); }
+.tc-head{ margin:0; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:70px;
+          line-height:1.05; letter-spacing:-1px; color:#FFFFFF; text-shadow:0 4px 30px rgba(0,0,0,.5); }
 .tc-head .key{ color:#00D4AA; }
-.tc-sub{ margin:0; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:54px;
+.tc-sub{ margin:0; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:32px;
          line-height:1.2; color:#FFFFFF; text-shadow:0 3px 22px rgba(0,0,0,.5); }
 .tc-logo{ position:absolute; left:0; bottom:80px; width:1080px; text-align:center; }
 .tc-logo img{ height:180px; width:auto; display:inline-block; filter:drop-shadow(0 4px 20px rgba(0,0,0,.6)); }
@@ -59,7 +59,7 @@ if(s){ var st=s.textContent.trim(); if(!st || st.indexOf('__SUB')>-1){ s.style.d
 var li=document.getElementById('tcLogoImg');
 if(li){ var src=li.getAttribute('src')||''; if(!src || src.indexOf('__LOGO')>-1){ var lw=document.getElementById('tcLogo'); if(lw) lw.style.display='none'; } }
 
-__fit('.tc-head',840,420,0,0);
-__fit('.tc-sub',840,180,0,0);
+__fit('.tc-head',600,300,0,0);
+__fit('.tc-sub',600,110,0,0);
 ''',
 }
