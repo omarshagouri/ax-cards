@@ -43,7 +43,6 @@ for(var i=1;i<=4;i++){var el=document.getElementById('li'+i);if(!el)continue;var
 var rev=parseInt(('__REVEAL__'.match(/\d+/)||[''])[0],10);
 var noRev=isNaN(rev);
 var n=noRev?filled.length:rev;
-show('lH',0.10,0.80,28);
 show('lH', 0.10, 0.50, 28);
 var k = 0;
 var totalItems = filled.length || 1;
