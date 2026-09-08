@@ -6,8 +6,8 @@ CARD = {
     "css": r'''.cl-wrap{position:absolute;left:96px;top:0;width:888px;height:100%;display:flex;flex-direction:column;justify-content:center;}
 .cl-title{font-family:'Space Grotesk';font-weight:700;font-size:56px;color:#00D4AA;text-align:center;margin-bottom:44px;opacity:0;transform:translateY(24px);}
 .cl-plot{position:relative;width:820px;height:460px;margin:0 auto;}
-.cl-yl{position:absolute;left:-70px;top:50%;transform:translateY(-50%) rotate(-90deg);font-family:'Space Grotesk';font-weight:600;font-size:32px;color:#00D4AA;}
-.cl-xl{position:absolute;bottom:-58px;left:50%;transform:translateX(-50%);font-family:'Space Grotesk';font-weight:600;font-size:32px;color:#00D4AA;}
+.cl-yl{position:absolute;left:-90px;top:50%;transform:translateY(-50%) rotate(-90deg);font-family:'Space Grotesk';font-weight:600;font-size:32px;color:#00D4AA;}
+.cl-xl{position:absolute;bottom:-70px;left:50%;transform:translateX(-50%);font-family:'Space Grotesk';font-weight:600;font-size:32px;color:#00D4AA;}
 .cl-anno{font-family:Inter;font-weight:500;font-size:38px;color:#FFFFFF;text-align:center;margin-top:80px;opacity:0;transform:translateY(22px);}
 
 /* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
@@ -18,9 +18,11 @@ CARD = {
 ''',
     "body": r'''<div id="axsafe"><div class="cl-wrap"><div class="cl-title" id="clTitle">__TITLE__</div>
 <div class="cl-plot"><svg width="820" height="460" viewBox="0 0 100 100" preserveAspectRatio="none" style="overflow:visible">
-<line x1="0" y1="100" x2="100" y2="100" stroke="rgba(140,160,184,.4)" stroke-width="0.6"/>
-<line x1="0" y1="0" x2="0" y2="100" stroke="rgba(140,160,184,.4)" stroke-width="0.6"/>
-<polyline id="clPath" points="__PATH__" fill="none" stroke="#00D4AA" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+<g transform="translate(0,100) scale(1,-1)">
+<line x1="0" y1="0" x2="100" y2="0" stroke="rgba(140,160,184,.6)" stroke-width="2.5" vector-effect="non-scaling-stroke"/>
+<line x1="0" y1="0" x2="0" y2="100" stroke="rgba(140,160,184,.6)" stroke-width="2.5" vector-effect="non-scaling-stroke"/>
+<polyline id="clPath" points="__PATH__" fill="none" stroke="#00D4AA" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+</g>
 </svg><div class="cl-yl">__Y_LABEL__</div><div class="cl-xl">__X_LABEL__</div></div>
 <div class="cl-anno" id="clAnno">__ANNOTATION__</div></div></div>''',
     "seek": r'''
