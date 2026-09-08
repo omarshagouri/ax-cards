@@ -6,8 +6,8 @@ CARD = {
     "css": r'''.cl-wrap{position:absolute;left:96px;top:0;width:888px;height:100%;display:flex;flex-direction:column;justify-content:center;}
 .cl-title{font-family:'Space Grotesk';font-weight:700;font-size:56px;color:#00D4AA;text-align:center;margin-bottom:44px;opacity:0;transform:translateY(24px);}
 .cl-plot{position:relative;width:820px;height:460px;margin:0 auto;}
-.cl-yl{position:absolute;left:-90px;top:50%;transform:translateY(-50%) rotate(-90deg);font-family:'Space Grotesk';font-weight:600;font-size:32px;color:#00D4AA;}
-.cl-xl{position:absolute;bottom:-70px;left:50%;transform:translateX(-50%);font-family:'Space Grotesk';font-weight:600;font-size:32px;color:#00D4AA;}
+.cl-yl{position:absolute;left:-86px;top:50%;transform:translateY(-50%) rotate(-90deg);font-family:'Space Grotesk';font-weight:600;font-size:32px;color:#00D4AA;}
+.cl-xl{position:absolute;bottom:-68px;left:50%;transform:translateX(-50%);font-family:'Space Grotesk';font-weight:600;font-size:32px;color:#00D4AA;}
 .cl-anno{font-family:Inter;font-weight:500;font-size:38px;color:#FFFFFF;text-align:center;margin-top:80px;opacity:0;transform:translateY(22px);}
 
 /* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
@@ -17,12 +17,11 @@ CARD = {
 #axsafe{position:absolute;left:0;top:0;width:1080px;height:1920px;transform:translateY(230px);}
 ''',
     "body": r'''<div id="axsafe"><div class="cl-wrap"><div class="cl-title" id="clTitle">__TITLE__</div>
-<div class="cl-plot"><svg width="820" height="460" viewBox="0 0 100 100" preserveAspectRatio="none" style="overflow:visible">
-<g transform="translate(0,100) scale(1,-1)">
-<line x1="0" y1="0" x2="100" y2="0" stroke="rgba(140,160,184,.6)" stroke-width="2.5" vector-effect="non-scaling-stroke"/>
-<line x1="0" y1="0" x2="0" y2="100" stroke="rgba(140,160,184,.6)" stroke-width="2.5" vector-effect="non-scaling-stroke"/>
-<polyline id="clPath" points="__PATH__" fill="none" stroke="#00D4AA" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
-</g>
+<div class="cl-plot"><svg width="820" height="460" style="overflow:visible">
+<!-- Axes are drawn slightly longer than the plotting area to perfectly frame the data -->
+<line x1="10" y1="450" x2="820" y2="450" stroke="rgba(140,160,184,.6)" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="10" y1="0" x2="10" y2="450" stroke="rgba(140,160,184,.6)" stroke-width="2.5" stroke-linecap="round"/>
+<polyline id="clPath" points="__PATH__" fill="none" stroke="#00D4AA" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
 </svg><div class="cl-yl">__Y_LABEL__</div><div class="cl-xl">__X_LABEL__</div></div>
 <div class="cl-anno" id="clAnno">__ANNOTATION__</div></div></div>''',
     "seek": r'''
@@ -44,8 +43,42 @@ if(ready){el.dataset.fitpx=size;el.dataset.fitok='1';}}
 
 __fit(".cl-title",888,140,0,1);__fit(".cl-anno",888,180,0,1);
 function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.opacity=e;el.style.transform='translateY('+(dy*(1-e))+'px)';}}
-function grow(id,a,b){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.transform='scaleX('+e+')';}}
 show('clTitle',S(0,3),E(0,3),24);
-var p=document.getElementById('clPath');if(p){var pts=(p.getAttribute('points')||'').trim().split(/\s+/).map(function(s){var xy=s.split(',');return [parseFloat(xy[0]),parseFloat(xy[1])];}).filter(function(a){return !isNaN(a[0])&&!isNaN(a[1]);});var sx=820/100,sy=460/100,len=0;for(var qi=1;qi<pts.length;qi++){var dx=(pts[qi][0]-pts[qi-1][0])*sx,dy=(pts[qi][1]-pts[qi-1][1])*sy;len+=Math.sqrt(dx*dx+dy*dy);}if(!len)len=800;p.style.strokeDasharray=len;var e=easeOutCubic(clamp((t-S(1,3))/(E(1,3)-S(1,3))));p.style.strokeDashoffset=len*(1-e);}
-show('clAnno',S(2,3),E(2,3),22);''',
+
+var p=document.getElementById('clPath');
+if(p){
+  if(!p.dataset.mapped){
+    var pts=(p.getAttribute('points')||'').trim().split(/\s+/).map(function(s){
+      var xy=s.split(',');return [parseFloat(xy[0]),parseFloat(xy[1])];
+    }).filter(function(a){return !isNaN(a[0])&&!isNaN(a[1]);});
+    
+    // Calculate mapping: scale 0-100 to an 800x440 zone to leave a 10px safe margin for rounded caps
+    var sx=800/100, sy=440/100, len=0;
+    var nPts=[];
+    var px=0, py=0;
+    for(var qi=0; qi<pts.length; qi++){
+      var nx = 10 + pts[qi][0] * sx;
+      var ny = 10 + (440 - pts[qi][1] * sy); // Safely invert the Y-axis mapping in JS
+      nPts.push(nx + ',' + ny);
+      if(qi > 0){
+        var dx = nx - px, dy = ny - py;
+        len += Math.sqrt(dx*dx + dy*dy);
+      }
+      px = nx; py = ny;
+    }
+    
+    // Inject the physical screen-pixel points back into the SVG before animating
+    p.setAttribute('points', nPts.join(' '));
+    p.dataset.len = len || 800;
+    p.dataset.mapped = '1';
+  }
+  
+  var L=parseFloat(p.dataset.len);
+  p.style.strokeDasharray = L;
+  var e=easeOutCubic(clamp((t-S(1,3))/(E(1,3)-S(1,3))));
+  p.style.strokeDashoffset = L * (1 - e);
+}
+
+show('clAnno',S(2,3),E(2,3),22);
+'''
 }
