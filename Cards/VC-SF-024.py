@@ -1,4 +1,4 @@
-# VC-SF-024  |  auto-calculates axis ticks directly from path data 2026-09-08
+# VC-SF-024  |  auto-calculates axis ticks directly from path data, increased annotation gap 2026-09-08
 CARD = {
     "id": "VC-SF-024",
     "slots": ["TITLE", "PATH", "X_LABEL", "Y_LABEL", "ANNOTATION"],
@@ -8,7 +8,7 @@ CARD = {
 .cl-plot{position:relative;width:820px;height:460px;margin:0 auto;}
 .cl-yl{position:absolute;left:-120px;top:50%;transform:translateY(-50%) rotate(-90deg);font-family:'Space Grotesk';font-weight:600;font-size:32px;color:#00D4AA;letter-spacing:1px;}
 .cl-xl{position:absolute;bottom:-90px;left:50%;transform:translateX(-50%);font-family:'Space Grotesk';font-weight:600;font-size:32px;color:#00D4AA;letter-spacing:1px;}
-.cl-anno{font-family:Inter;font-weight:500;font-size:38px;color:#FFFFFF;text-align:center;margin-top:90px;opacity:0;transform:translateY(22px);}
+.cl-anno{font-family:Inter;font-weight:500;font-size:38px;color:#FFFFFF;text-align:center;margin-top:160px;opacity:0;transform:translateY(22px);}
 .t-y{position:absolute;left:-20px;transform:translate(-100%, -50%);font-family:Inter;font-weight:500;font-size:24px;color:#8CA0B8;opacity:0;}
 .t-x{position:absolute;bottom:-40px;transform:translateX(-50%);font-family:Inter;font-weight:500;font-size:24px;color:#8CA0B8;opacity:0;}
 
@@ -70,13 +70,11 @@ if(p){
       var px=0, py=0;
       
       for(var qi=0; qi<pts.length; qi++){
-        // Calculate min and max bounds directly from data
         if(pts[qi][0]<mX) mX=pts[qi][0];
         if(pts[qi][0]>MX) MX=pts[qi][0];
         if(pts[qi][1]<mY) mY=pts[qi][1];
         if(pts[qi][1]>MY) MY=pts[qi][1];
 
-        // Map abstract points to precise 800x440 screen box
         var nx = 10 + pts[qi][0] * sx;
         var ny = 10 + (440 - pts[qi][1] * sy); 
         nPts.push(nx + ',' + ny);
@@ -89,7 +87,6 @@ if(p){
       }
       p.setAttribute('points', nPts.join(' '));
       
-      // Auto-populate the scale markers
       var yLab = document.getElementById('clYl');
       var suf = (yLab && yLab.textContent.indexOf('%') > -1) ? '%' : '';
       document.getElementById('txMin').textContent = Math.round(mX);
@@ -107,7 +104,6 @@ if(p){
   var e=easeOutCubic(clamp((t-S(1,3))/(E(1,3)-S(1,3))));
   p.style.strokeDashoffset = L * (1 - e);
   
-  // Fade in the scale markers at the exact same time the line draws
   ['tyMax','tyMin','txMin','txMax'].forEach(function(i){
     var d=document.getElementById(i); if(d) d.style.opacity = e;
   });
