@@ -1,4 +1,4 @@
-# VC-SF-024  |  caption-safe-zone pass 2026-08-18
+# VC-SF-024  |  fix draw-on: dash length in screen px (was user units -> dashes) 2026-09-07
 CARD = {
     "id": "VC-SF-024",
     "slots": ["TITLE", "PATH", "X_LABEL", "Y_LABEL", "ANNOTATION"],
@@ -44,6 +44,6 @@ __fit(".cl-title",888,140,0,1);__fit(".cl-anno",888,180,0,1);
 function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.opacity=e;el.style.transform='translateY('+(dy*(1-e))+'px)';}}
 function grow(id,a,b){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.transform='scaleX('+e+')';}}
 show('clTitle',S(0,3),E(0,3),24);
-var p=document.getElementById('clPath');if(p){var len=p.getTotalLength?p.getTotalLength():500;p.style.strokeDasharray=len;var e=easeOutCubic(clamp((t-S(1,3))/(E(1,3)-S(1,3))));p.style.strokeDashoffset=len*(1-e);}
+var p=document.getElementById('clPath');if(p){var pts=(p.getAttribute('points')||'').trim().split(/\s+/).map(function(s){var xy=s.split(',');return [parseFloat(xy[0]),parseFloat(xy[1])];}).filter(function(a){return !isNaN(a[0])&&!isNaN(a[1]);});var sx=820/100,sy=460/100,len=0;for(var qi=1;qi<pts.length;qi++){var dx=(pts[qi][0]-pts[qi-1][0])*sx,dy=(pts[qi][1]-pts[qi-1][1])*sy;len+=Math.sqrt(dx*dx+dy*dy);}if(!len)len=800;p.style.strokeDasharray=len;var e=easeOutCubic(clamp((t-S(1,3))/(E(1,3)-S(1,3))));p.style.strokeDashoffset=len*(1-e);}
 show('clAnno',S(2,3),E(2,3),22);''',
 }
