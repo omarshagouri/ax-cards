@@ -1,14 +1,16 @@
-# VC-SF-024  |  fix draw-on: dash length in screen px (was user units -> dashes) 2026-09-07
+# VC-SF-024  |  added gridlines, scale ticks, and fixed axis label overlap 2026-09-08
 CARD = {
     "id": "VC-SF-024",
-    "slots": ["TITLE", "PATH", "X_LABEL", "Y_LABEL", "ANNOTATION"],
+    "slots": ["TITLE", "PATH", "X_LABEL", "Y_LABEL", "ANNOTATION", "Y_MAX", "Y_MIN", "X_MAX", "X_MIN"],
     "default_duration": 4.5,
     "css": r'''.cl-wrap{position:absolute;left:96px;top:0;width:888px;height:100%;display:flex;flex-direction:column;justify-content:center;}
 .cl-title{font-family:'Space Grotesk';font-weight:700;font-size:56px;color:#00D4AA;text-align:center;margin-bottom:44px;opacity:0;transform:translateY(24px);}
 .cl-plot{position:relative;width:820px;height:460px;margin:0 auto;}
-.cl-yl{position:absolute;left:-86px;top:50%;transform:translateY(-50%) rotate(-90deg);font-family:'Space Grotesk';font-weight:600;font-size:32px;color:#00D4AA;}
-.cl-xl{position:absolute;bottom:-68px;left:50%;transform:translateX(-50%);font-family:'Space Grotesk';font-weight:600;font-size:32px;color:#00D4AA;}
-.cl-anno{font-family:Inter;font-weight:500;font-size:38px;color:#FFFFFF;text-align:center;margin-top:80px;opacity:0;transform:translateY(22px);}
+.cl-yl{position:absolute;left:-120px;top:50%;transform:translateY(-50%) rotate(-90deg);font-family:'Space Grotesk';font-weight:600;font-size:32px;color:#00D4AA;letter-spacing:1px;}
+.cl-xl{position:absolute;bottom:-90px;left:50%;transform:translateX(-50%);font-family:'Space Grotesk';font-weight:600;font-size:32px;color:#00D4AA;letter-spacing:1px;}
+.cl-anno{font-family:Inter;font-weight:500;font-size:38px;color:#FFFFFF;text-align:center;margin-top:90px;opacity:0;transform:translateY(22px);}
+.t-y{position:absolute;left:-20px;transform:translate(-100%, -50%);font-family:Inter;font-weight:500;font-size:24px;color:#8CA0B8;}
+.t-x{position:absolute;bottom:-40px;transform:translateX(-50%);font-family:Inter;font-weight:500;font-size:24px;color:#8CA0B8;}
 
 /* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
 .cl-wrap{top:192px !important;height:988px !important;}
@@ -18,11 +20,20 @@ CARD = {
 ''',
     "body": r'''<div id="axsafe"><div class="cl-wrap"><div class="cl-title" id="clTitle">__TITLE__</div>
 <div class="cl-plot"><svg width="820" height="460" style="overflow:visible">
-<!-- Axes are drawn slightly longer than the plotting area to perfectly frame the data -->
+<!-- Gridlines -->
+<line x1="10" y1="10" x2="810" y2="10" stroke="rgba(140,160,184,.15)" stroke-width="2" stroke-dasharray="10 10"/>
+<line x1="10" y1="230" x2="810" y2="230" stroke="rgba(140,160,184,.15)" stroke-width="2" stroke-dasharray="10 10"/>
+<!-- Axes -->
 <line x1="10" y1="450" x2="820" y2="450" stroke="rgba(140,160,184,.6)" stroke-width="2.5" stroke-linecap="round"/>
 <line x1="10" y1="0" x2="10" y2="450" stroke="rgba(140,160,184,.6)" stroke-width="2.5" stroke-linecap="round"/>
 <polyline id="clPath" points="__PATH__" fill="none" stroke="#00D4AA" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-</svg><div class="cl-yl">__Y_LABEL__</div><div class="cl-xl">__X_LABEL__</div></div>
+</svg>
+<!-- Scale Ticks -->
+<div class="t-y" style="top:10px;">__Y_MAX__</div>
+<div class="t-y" style="top:450px;">__Y_MIN__</div>
+<div class="t-x" style="left:10px;">__X_MIN__</div>
+<div class="t-x" style="left:810px;">__X_MAX__</div>
+<div class="cl-yl">__Y_LABEL__</div><div class="cl-xl">__X_LABEL__</div></div>
 <div class="cl-anno" id="clAnno">__ANNOTATION__</div></div></div>''',
     "seek": r'''
 var x=(typeof x!=='undefined'&&x>0)?x:4;
@@ -42,6 +53,12 @@ if(ready){el.dataset.fitpx=size;el.dataset.fitok='1';}}
 };}
 
 __fit(".cl-title",888,140,0,1);__fit(".cl-anno",888,180,0,1);
+
+// Hide empty tick markers if not provided in payload
+document.querySelectorAll('.t-y, .t-x').forEach(function(el){
+    if(el.textContent.indexOf('__') > -1) el.style.opacity = '0';
+});
+
 function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.opacity=e;el.style.transform='translateY('+(dy*(1-e))+'px)';}}
 show('clTitle',S(0,3),E(0,3),24);
 
@@ -52,13 +69,13 @@ if(p){
       var xy=s.split(',');return [parseFloat(xy[0]),parseFloat(xy[1])];
     }).filter(function(a){return !isNaN(a[0])&&!isNaN(a[1]);});
     
-    // Calculate mapping: scale 0-100 to an 800x440 zone to leave a 10px safe margin for rounded caps
+    // Scale 0-100 to 800x440 plotting area
     var sx=800/100, sy=440/100, len=0;
     var nPts=[];
     var px=0, py=0;
     for(var qi=0; qi<pts.length; qi++){
       var nx = 10 + pts[qi][0] * sx;
-      var ny = 10 + (440 - pts[qi][1] * sy); // Safely invert the Y-axis mapping in JS
+      var ny = 10 + (440 - pts[qi][1] * sy); 
       nPts.push(nx + ',' + ny);
       if(qi > 0){
         var dx = nx - px, dy = ny - py;
@@ -67,7 +84,6 @@ if(p){
       px = nx; py = ny;
     }
     
-    // Inject the physical screen-pixel points back into the SVG before animating
     p.setAttribute('points', nPts.join(' '));
     p.dataset.len = len || 800;
     p.dataset.mapped = '1';
