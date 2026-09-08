@@ -1,7 +1,7 @@
-# VC-SF-024  |  added gridlines, scale ticks, and fixed axis label overlap 2026-09-08
+# VC-SF-024  |  auto-calculates axis ticks directly from path data 2026-09-08
 CARD = {
     "id": "VC-SF-024",
-    "slots": ["TITLE", "PATH", "X_LABEL", "Y_LABEL", "ANNOTATION", "Y_MAX", "Y_MIN", "X_MAX", "X_MIN"],
+    "slots": ["TITLE", "PATH", "X_LABEL", "Y_LABEL", "ANNOTATION"],
     "default_duration": 4.5,
     "css": r'''.cl-wrap{position:absolute;left:96px;top:0;width:888px;height:100%;display:flex;flex-direction:column;justify-content:center;}
 .cl-title{font-family:'Space Grotesk';font-weight:700;font-size:56px;color:#00D4AA;text-align:center;margin-bottom:44px;opacity:0;transform:translateY(24px);}
@@ -9,8 +9,8 @@ CARD = {
 .cl-yl{position:absolute;left:-120px;top:50%;transform:translateY(-50%) rotate(-90deg);font-family:'Space Grotesk';font-weight:600;font-size:32px;color:#00D4AA;letter-spacing:1px;}
 .cl-xl{position:absolute;bottom:-90px;left:50%;transform:translateX(-50%);font-family:'Space Grotesk';font-weight:600;font-size:32px;color:#00D4AA;letter-spacing:1px;}
 .cl-anno{font-family:Inter;font-weight:500;font-size:38px;color:#FFFFFF;text-align:center;margin-top:90px;opacity:0;transform:translateY(22px);}
-.t-y{position:absolute;left:-20px;transform:translate(-100%, -50%);font-family:Inter;font-weight:500;font-size:24px;color:#8CA0B8;}
-.t-x{position:absolute;bottom:-40px;transform:translateX(-50%);font-family:Inter;font-weight:500;font-size:24px;color:#8CA0B8;}
+.t-y{position:absolute;left:-20px;transform:translate(-100%, -50%);font-family:Inter;font-weight:500;font-size:24px;color:#8CA0B8;opacity:0;}
+.t-x{position:absolute;bottom:-40px;transform:translateX(-50%);font-family:Inter;font-weight:500;font-size:24px;color:#8CA0B8;opacity:0;}
 
 /* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
 .cl-wrap{top:192px !important;height:988px !important;}
@@ -28,12 +28,12 @@ CARD = {
 <line x1="10" y1="0" x2="10" y2="450" stroke="rgba(140,160,184,.6)" stroke-width="2.5" stroke-linecap="round"/>
 <polyline id="clPath" points="__PATH__" fill="none" stroke="#00D4AA" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
-<!-- Scale Ticks -->
-<div class="t-y" style="top:10px;">__Y_MAX__</div>
-<div class="t-y" style="top:450px;">__Y_MIN__</div>
-<div class="t-x" style="left:10px;">__X_MIN__</div>
-<div class="t-x" style="left:810px;">__X_MAX__</div>
-<div class="cl-yl">__Y_LABEL__</div><div class="cl-xl">__X_LABEL__</div></div>
+<!-- Auto-populated Scale Ticks -->
+<div class="t-y" id="tyMax" style="top:10px;"></div>
+<div class="t-y" id="tyMin" style="top:450px;"></div>
+<div class="t-x" id="txMin" style="left:10px;"></div>
+<div class="t-x" id="txMax" style="left:810px;"></div>
+<div class="cl-yl" id="clYl">__Y_LABEL__</div><div class="cl-xl">__X_LABEL__</div></div>
 <div class="cl-anno" id="clAnno">__ANNOTATION__</div></div></div>''',
     "seek": r'''
 var x=(typeof x!=='undefined'&&x>0)?x:4;
@@ -53,12 +53,6 @@ if(ready){el.dataset.fitpx=size;el.dataset.fitok='1';}}
 };}
 
 __fit(".cl-title",888,140,0,1);__fit(".cl-anno",888,180,0,1);
-
-// Hide empty tick markers if not provided in payload
-document.querySelectorAll('.t-y, .t-x').forEach(function(el){
-    if(el.textContent.indexOf('__') > -1) el.style.opacity = '0';
-});
-
 function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.opacity=e;el.style.transform='translateY('+(dy*(1-e))+'px)';}}
 show('clTitle',S(0,3),E(0,3),24);
 
@@ -69,22 +63,41 @@ if(p){
       var xy=s.split(',');return [parseFloat(xy[0]),parseFloat(xy[1])];
     }).filter(function(a){return !isNaN(a[0])&&!isNaN(a[1]);});
     
-    // Scale 0-100 to 800x440 plotting area
-    var sx=800/100, sy=440/100, len=0;
-    var nPts=[];
-    var px=0, py=0;
-    for(var qi=0; qi<pts.length; qi++){
-      var nx = 10 + pts[qi][0] * sx;
-      var ny = 10 + (440 - pts[qi][1] * sy); 
-      nPts.push(nx + ',' + ny);
-      if(qi > 0){
-        var dx = nx - px, dy = ny - py;
-        len += Math.sqrt(dx*dx + dy*dy);
+    var len=0, nPts=[];
+    if(pts.length > 0){
+      var mX=pts[0][0], MX=pts[0][0], mY=pts[0][1], MY=pts[0][1];
+      var sx=800/100, sy=440/100;
+      var px=0, py=0;
+      
+      for(var qi=0; qi<pts.length; qi++){
+        // Calculate min and max bounds directly from data
+        if(pts[qi][0]<mX) mX=pts[qi][0];
+        if(pts[qi][0]>MX) MX=pts[qi][0];
+        if(pts[qi][1]<mY) mY=pts[qi][1];
+        if(pts[qi][1]>MY) MY=pts[qi][1];
+
+        // Map abstract points to precise 800x440 screen box
+        var nx = 10 + pts[qi][0] * sx;
+        var ny = 10 + (440 - pts[qi][1] * sy); 
+        nPts.push(nx + ',' + ny);
+        
+        if(qi > 0){
+          var dx = nx - px, dy = ny - py;
+          len += Math.sqrt(dx*dx + dy*dy);
+        }
+        px = nx; py = ny;
       }
-      px = nx; py = ny;
+      p.setAttribute('points', nPts.join(' '));
+      
+      // Auto-populate the scale markers
+      var yLab = document.getElementById('clYl');
+      var suf = (yLab && yLab.textContent.indexOf('%') > -1) ? '%' : '';
+      document.getElementById('txMin').textContent = Math.round(mX);
+      document.getElementById('txMax').textContent = Math.round(MX);
+      document.getElementById('tyMin').textContent = Math.round(mY) + suf;
+      document.getElementById('tyMax').textContent = Math.round(MY) + suf;
     }
     
-    p.setAttribute('points', nPts.join(' '));
     p.dataset.len = len || 800;
     p.dataset.mapped = '1';
   }
@@ -93,6 +106,11 @@ if(p){
   p.style.strokeDasharray = L;
   var e=easeOutCubic(clamp((t-S(1,3))/(E(1,3)-S(1,3))));
   p.style.strokeDashoffset = L * (1 - e);
+  
+  // Fade in the scale markers at the exact same time the line draws
+  ['tyMax','tyMin','txMin','txMax'].forEach(function(i){
+    var d=document.getElementById(i); if(d) d.style.opacity = e;
+  });
 }
 
 show('clAnno',S(2,3),E(2,3),22);
