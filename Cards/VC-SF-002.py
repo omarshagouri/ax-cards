@@ -83,8 +83,8 @@ __fit("#title",1000,180,0,1);__fit(".val",220,0,1,1);__fit(".axis",360,0,1,1);__
         var maxV=Math.max(a,b,0.0001), maxH=450;
         var hA=maxH*a/maxV, hB=maxH*b/maxV;
         barA.style.height=hA+'px'; barB.style.height=hB+'px';
-        valA.style.bottom=(1000+hA+18)+'px';
-        valB.style.bottom=(1000+hB+18)+'px';
+   valA.style.bottom=(800+hA+18)+'px';
+valB.style.bottom=(800+hB+18)+'px';
 
         var te=easeOutCubic(clamp(t/0.6));
         title.style.opacity=te;
