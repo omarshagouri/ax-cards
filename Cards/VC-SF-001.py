@@ -46,7 +46,7 @@ if (keyEl && keyEl.textContent.trim().length > 3) {
 }
 
 // 2. THEN run the shrink-to-fit calculator
-__fit(".kicker",900,0,1,1);
+__fit(".kicker",900,0,0,1);
 __fit(".hero",900,0,1,1);
 
 var kick = document.getElementById('kick');
