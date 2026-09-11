@@ -1,4 +1,4 @@
-# VC-SH-002  |  caption-safe-zone pass 2026-08-18
+# VC-SH-002  |  caption-safe-zone pass 2026-08-18  |  SOURCE guard 2026-09-10
 CARD = {
     "id": "VC-SH-002",
     "slots": ["TITLE", "VALUE_A", "LABEL_A", "VALUE_B", "LABEL_B", "SOURCE"],
@@ -91,7 +91,7 @@ __fit("#title",1000,180,0,1);__fit(".val",220,0,1,1);__fit(".axis",360,0,1,1);__
         title.style.transform='translateY('+(30*(1-te))+'px)';
 
         var fe=clamp((t-S(0,3))/(E(0,3)-S(0,3)));
-        labA.style.opacity=fe; labB.style.opacity=fe; source.style.opacity=fe;
+        labA.style.opacity=fe; labB.style.opacity=fe; var _sv=(source.textContent||'').trim(); source.style.opacity=(_sv.length>0 && _sv.indexOf('__')<0 && _sv.toUpperCase().indexOf('ILLUSTRATIVE')!==0)?fe:0;
 
         var ge=easeOutCubic(clamp((t-S(1,3))/(E(1,3)-S(1,3))));
         barA.style.transform='scaleY('+ge+')';

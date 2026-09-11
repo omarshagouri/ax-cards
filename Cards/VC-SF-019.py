@@ -1,4 +1,4 @@
-# VC-SF-019  |  caption-safe-zone pass 2026-08-18
+# VC-SF-019  |  caption-safe-zone pass 2026-08-18  |  SOURCE guard 2026-09-10
 CARD = {
     "id": "VC-SF-019",
     "slots": ["QUOTE_TEXT", "SOURCE_NAME"],
@@ -38,5 +38,5 @@ if(ready){el.dataset.fitpx=size;el.dataset.fitok='1';}}
 __fit(".q-text",888,520,0,0);__fit(".q-name",740,0,1,0);
 function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.opacity=e;el.style.transform='translateY('+(dy*(1-e))+'px)';}}
 function grow(id,a,b){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.transform='scaleX('+e+')';}}
-show('qMark',S(0,3),E(0,3),20);show('qText',S(1,3),E(1,3),30);show('qSrc',S(2,3),E(2,3),20);''',
+show('qMark',S(0,3),E(0,3),20);show('qText',S(1,3),E(1,3),30);(function(){var qs=document.getElementById('qSrc');var nm=qs?(qs.textContent||'').trim():'';if(nm.length>0 && nm.indexOf('__')<0 && nm.toUpperCase().indexOf('ILLUSTRATIVE')!==0){show('qSrc',S(2,3),E(2,3),20);}else if(qs){qs.style.opacity=0;}})();''',
 }

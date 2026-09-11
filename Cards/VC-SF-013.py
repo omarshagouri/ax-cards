@@ -1,4 +1,4 @@
-# VC-SF-013  |  caption-safe-zone pass 2026-08-18
+# VC-SF-013  |  caption-safe-zone pass 2026-08-18  |  SOURCE guard 2026-09-10
 CARD = {
     "id": "VC-SF-013",
     "slots": ["VALUE", "METRIC_LABEL", "SOURCE"],
@@ -50,5 +50,5 @@ var gv=document.getElementById('gVal');gv.style.opacity=easeOutCubic(clamp((t-S(
 if(!gv.dataset.full){gv.dataset.full=gv.textContent;}
 var num=(full*e);var suf=gv.dataset.full.replace(/[\d.\s]/g,'');gv.textContent=(Math.round(num))+suf;
 show('gLab',S(2,4),E(2,4),24);
-var s=document.getElementById('gSrc');if(s){var ok=s.textContent.indexOf('__')<0 && s.textContent.replace('SOURCE:','').trim().length>0;s.style.opacity=ok?easeOutCubic(clamp((t-S(3,4))/(E(3,4)-S(3,4)))):0;}''',
+var s=document.getElementById('gSrc');if(s){var ok=s.textContent.indexOf('__')<0 && s.textContent.replace('SOURCE:','').trim().length>0 && s.textContent.replace('SOURCE:','').trim().toUpperCase().indexOf('ILLUSTRATIVE')!==0;s.style.opacity=ok?easeOutCubic(clamp((t-S(3,4))/(E(3,4)-S(3,4)))):0;}''',
 }

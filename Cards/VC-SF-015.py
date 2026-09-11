@@ -1,4 +1,4 @@
-# VC-SF-015  |  caption-safe-zone pass 2026-08-18
+# VC-SF-015  |  caption-safe-zone pass 2026-08-18  |  SOURCE guard 2026-09-10
 CARD = {
     "id": "VC-SF-015",
     "slots": ["AMOUNT", "LABEL", "SOURCE"],
@@ -40,5 +40,5 @@ function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.
 function grow(id,a,b){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.transform='scaleX('+e+')';}}
 show('coLab',S(0,3),E(0,3),22);
 var e=easeOutCubic(clamp((t-S(1,3))/(E(1,3)-S(1,3))));var a=document.getElementById('coAmt');a.style.opacity=e;a.style.transform='scale('+(0.85+0.15*e)+')';
-var s=document.getElementById('coSrc');if(s){var ok=s.textContent.indexOf('__')<0 && s.textContent.replace('SOURCE:','').trim().length>0;s.style.opacity=ok?easeOutCubic(clamp((t-S(2,3))/(E(2,3)-S(2,3)))):0;}''',
+var s=document.getElementById('coSrc');if(s){var ok=s.textContent.indexOf('__')<0 && s.textContent.replace('SOURCE:','').trim().length>0 && s.textContent.replace('SOURCE:','').trim().toUpperCase().indexOf('ILLUSTRATIVE')!==0;s.style.opacity=ok?easeOutCubic(clamp((t-S(2,3))/(E(2,3)-S(2,3)))):0;}''',
 }

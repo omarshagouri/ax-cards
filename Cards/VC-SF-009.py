@@ -1,4 +1,4 @@
-# VC-SF-009  |  caption-safe-zone pass 2026-08-18  |  SOURCE guard: hide ILLUSTRATIVE placeholder 2026-09-10
+# VC-SF-009  |  caption-safe-zone pass 2026-08-18  |  SOURCE guard 2026-09-10
 CARD = {
     "id": "VC-SF-009",
     "slots": ["MYTH_LINE", "FACT_LINE", "SOURCE"],
@@ -42,5 +42,5 @@ __fit(".mf-myth",888,300,0,0);__fit(".mf-fact",888,320,0,0);__fit(".src-txt",820
 function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.opacity=e;el.style.transform='translateY('+(dy*(1-e))+'px)';}}
 function grow(id,a,b){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.transform='scaleX('+e+')';}}
 show('mfT1',S(0,5),E(0,5),20);show('mfMyth',S(1,5),E(1,5),28);show('mfT2',S(2,5),E(2,5),20);show('mfFact',S(3,5),E(3,5),30);
-var s=document.getElementById('mfSrc');if(s){var _sv=s.textContent.replace('SOURCE:','').trim();var st=(s.textContent.indexOf('__')<0 && _sv.length>0 && _sv.toUpperCase().indexOf('ILLUSTRATIVE')!==0);s.style.opacity=st?easeOutCubic(clamp((t-S(4,5))/(E(4,5)-S(4,5)))):0;}''',
+var s=document.getElementById('mfSrc');if(s){var st=(s.textContent.indexOf('__')<0 && s.textContent.replace('SOURCE:','').trim().length>0 && s.textContent.replace('SOURCE:','').trim().toUpperCase().indexOf('ILLUSTRATIVE')!==0);s.style.opacity=st?easeOutCubic(clamp((t-S(4,5))/(E(4,5)-S(4,5)))):0;}''',
 }
