@@ -87,24 +87,47 @@ var prog=document.getElementById('tlProg');
 if(N===0){
 if(line){line.style.display='none';}
 }else if(N===1){
-/* Single event: center it and remove the fake 4-point timeline. */
+/* One real event:
+   keep the timeline language. Show a short centered line + one dot,
+   then reveal the date and label beneath it. */
 var el=visible[0];
 el.style.left='50%';
-el.style.width='700px';
+el.style.width='760px';
 
 var yr=el.querySelector('.tl-yr');
 var lb=el.querySelector('.tl-lb');
-if(yr){yr.style.maxWidth='660px';}
-if(lb){lb.style.maxWidth='600px';}
 
-if(line){line.style.background='transparent';}
-if(prog){prog.style.display='none';}
+if(yr){
+yr.style.maxWidth='700px';
+yr.style.fontSize='46px';
+yr.style.lineHeight='1.08';
+yr.style.whiteSpace='nowrap';
+}
+if(lb){
+lb.style.maxWidth='640px';
+lb.style.fontSize='30px';
+lb.style.lineHeight='1.22';
+}
 
-__fit("#"+el.id+" .tl-yr",660,120,1,1);
-__fit("#"+el.id+" .tl-lb",600,180,0,1);
+if(line){
+line.style.width='560px';
+line.style.margin='0 auto';
+line.style.background='rgba(140,160,184,.25)';
+line.style.transform='translateY(55px)';
+}
+if(prog){
+prog.style.display='block';
+prog.style.transformOrigin='center';
+}
 
-/* Use the full motion window and hold only the final second. */
-show(el.id,0.12*x,x-HOLD,18);
+__fit("#"+el.id+" .tl-yr",700,120,1,1);
+__fit("#"+el.id+" .tl-lb",640,180,0,1);
+
+/* Draw the short line first, then reveal the milestone.
+   Final 1 second remains fully settled. */
+var activeEnd=x-HOLD;
+grow('tlProg',0.10*x,0.42*activeEnd);
+show(el.id,0.28*activeEnd,activeEnd,18);
 }else{
 /* Evenly redistribute 2-4 real events. */
 var positions={
