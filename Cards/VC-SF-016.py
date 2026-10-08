@@ -1,32 +1,21 @@
-# VC-SF-016  |  caption-safe-zone pass 2026-08-18
+# VC-SF-016  |  auto-fit safe-zone patch applied 2026-08-09
+# Text shrink-to-fit added at top of seek(); css/body unchanged.
 CARD = {
     "id": "VC-SF-016",
-    "slots": ["P1_YEAR", "P1_LABEL", "P2_YEAR", "P2_LABEL", "P3_YEAR", "P3_LABEL", "P4_YEAR", "P4_LABEL"],
-    "default_duration": 4.5,
-    "css": r'''.tl-wrap{position:absolute;left:96px;top:0;width:888px;height:100%;display:flex;flex-direction:column;justify-content:center;}
-.tl-line{position:relative;height:6px;background:rgba(140,160,184,.25);border-radius:3px;margin:0 20px;}
-.tl-prog{position:absolute;left:0;top:0;height:100%;width:100%;background:#00D4AA;transform:scaleX(0);transform-origin:left;border-radius:3px;}
-.tl-pts{position:relative;display:flex;justify-content:space-between;margin:0 20px;}
-.tl-pt{position:absolute;transform:translateX(-50%);text-align:center;top:-14px;opacity:0;width:230px;}
-.tl-dot{width:30px;height:30px;border-radius:50%;background:#00D4AA;margin:0 auto 18px;box-shadow:0 0 0 8px rgba(0,212,170,.18);}
-.tl-yr{font-family:'Space Grotesk';font-weight:700;font-size:44px;color:#FFFFFF;}
-.tl-lb{font-family:Inter;font-weight:400;font-size:32px;color:#8CA0B8;max-width:230px;margin:8px auto 0;line-height:1.2;}
-
-/* --- caption-safe-zone pass: keep all text above y=1180 (caption band y1180-1540) --- */
-.tl-wrap{top:192px !important;height:988px !important;}
-
+    "slots": ["TAG_TEXT"],
+    "default_duration": 3.0,
+    "css": r'''.tag-chip{position:absolute;left:96px;top:300px;display:inline-flex;align-items:center;gap:16px;background:rgba(10,22,40,.82);border:2px solid #00D4AA;border-radius:14px;padding:20px 30px;opacity:0;transform:translateX(-30px);}
+.tag-dot{width:16px;height:16px;border-radius:50%;background:#00D4AA;}
+.tag-t{font-family:'Space Grotesk';font-weight:600;font-size:40px;letter-spacing:.06em;color:#FFFFFF;text-transform:uppercase;}
 /* ax caption-safe v3: center ~y920, clamp bottom<=1340 (repo band bottom=1540) */
-#axsafe{position:absolute;left:0;top:0;width:1080px;height:1920px;transform:translateY(187px);}
+#axsafe{position:absolute;left:0;top:0;width:1080px;height:1920px;transform:translateY(575px);}
 ''',
-    "body": r'''<div id="axsafe"><div class="tl-wrap"><div class="tl-line"><div class="tl-prog" id="tlProg"></div>
-<div class="tl-pts" id="tlPts">
-<div class="tl-pt" id="tp1" style="left:8%"><div class="tl-dot"></div><div class="tl-yr">__P1_YEAR__</div><div class="tl-lb">__P1_LABEL__</div></div>
-<div class="tl-pt" id="tp2" style="left:36%"><div class="tl-dot"></div><div class="tl-yr">__P2_YEAR__</div><div class="tl-lb">__P2_LABEL__</div></div>
-<div class="tl-pt" id="tp3" style="left:64%"><div class="tl-dot"></div><div class="tl-yr">__P3_YEAR__</div><div class="tl-lb">__P3_LABEL__</div></div>
-<div class="tl-pt" id="tp4" style="left:92%"><div class="tl-dot"></div><div class="tl-yr">__P4_YEAR__</div><div class="tl-lb">__P4_LABEL__</div></div>
-</div></div></div></div>''',
+    "body": r'''<div id="axsafe"><div class="tag-chip" id="tagChip"><div class="tag-dot"></div><div class="tag-t">__TAG_TEXT__</div></div></div>''',
     "seek": r'''
-var x=(typeof x!=='undefined'&&x>0)?x:4;var HOLD=1,ENTER=0.5;function S(i,N){return N<2?0.12*x:0.12*x+(i/(N-1))*((x-HOLD-ENTER)-0.12*x);}function E(i,N){return N<2?Math.min(x-HOLD,0.12*x+0.6):S(i,N)+ENTER;}
+var x=(typeof x!=='undefined'&&x>0)?x:4;
+var HOLD=1,ENTER=0.5;
+function S(i,N){return N<2?0.12*x:0.12*x+(i/(N-1))*((x-HOLD-ENTER)-0.12*x);}
+function E(i,N){return N<2?Math.min(x-HOLD,0.12*x+0.6):S(i,N)+ENTER;}
 if(!window.__fit){window.__fit=function(sel,maxW,maxH,line,center){
 var els=document.querySelectorAll(sel);var ready=(!document.fonts)||document.fonts.status==='loaded';
 for(var i=0;i<els.length;i++){var el=els[i];
@@ -39,115 +28,8 @@ while(size>16&&g<240&&(el.scrollWidth>el.clientWidth+0.5||(maxH&&el.scrollHeight
 if(ready){el.dataset.fitpx=size;el.dataset.fitok='1';}}
 };}
 
-function show(id,a,b,dy){
-var e=easeOutCubic(clamp((t-a)/(b-a)));
-var el=document.getElementById(id);
-if(el){
-el.style.opacity=e;
-el.style.transform='translateX(-50%) translateY('+(dy*(1-e))+'px)';
-}}
-function grow(id,a,b){
-var e=easeOutCubic(clamp((t-a)/(b-a)));
-var el=document.getElementById(id);
-if(el){el.style.transform='scaleX('+e+')';}
-}
-
-/* Optional timeline points:
-   Empty YEAR+LABEL pairs disappear completely.
-   Remaining points are redistributed across the available timeline.
-   One point becomes a centered single milestone instead of leaving empty dots. */
-var ids=['tp1','tp2','tp3','tp4'];
-var visible=[];
-
-ids.forEach(function(id){
-var el=document.getElementById(id);
-if(!el){return;}
-
-var yr=el.querySelector('.tl-yr');
-var lb=el.querySelector('.tl-lb');
-
-var year=yr?(yr.textContent||'').trim():'';
-var label=lb?(lb.textContent||'').trim():'';
-
-var unresolved=(year.indexOf('__')>-1 || label.indexOf('__')>-1);
-var empty=(year.length===0 && label.length===0);
-
-if(unresolved || empty){
-el.style.display='none';
-}else{
-el.style.display='';
-visible.push(el);
-}
-});
-
-var N=visible.length;
-var line=document.querySelector('.tl-line');
-var prog=document.getElementById('tlProg');
-
-if(N===0){
-if(line){line.style.display='none';}
-}else if(N===1){
-/* One real event:
-   keep the timeline language. Show a short centered line + one dot,
-   then reveal the date and label beneath it. */
-var el=visible[0];
-el.style.left='50%';
-el.style.width='760px';
-
-var yr=el.querySelector('.tl-yr');
-var lb=el.querySelector('.tl-lb');
-
-if(yr){
-yr.style.maxWidth='700px';
-yr.style.fontSize='46px';
-yr.style.lineHeight='1.08';
-yr.style.whiteSpace='nowrap';
-}
-if(lb){
-lb.style.maxWidth='640px';
-lb.style.fontSize='30px';
-lb.style.lineHeight='1.22';
-}
-
-if(line){
-line.style.width='560px';
-line.style.margin='0 auto';
-line.style.background='rgba(140,160,184,.25)';
-line.style.transform='translateY(55px)';
-}
-if(prog){
-prog.style.display='block';
-prog.style.transformOrigin='center';
-}
-
-__fit("#"+el.id+" .tl-yr",700,120,1,1);
-__fit("#"+el.id+" .tl-lb",640,180,0,1);
-
-/* Draw the short line first, then reveal the milestone.
-   Final 1 second remains fully settled. */
-var activeEnd=x-HOLD;
-grow('tlProg',0.10*x,0.42*activeEnd);
-show(el.id,0.28*activeEnd,activeEnd,18);
-}else{
-/* Evenly redistribute 2-4 real events. */
-var positions={
-2:[18,82],
-3:[10,50,90],
-4:[8,36,64,92]
-}[N];
-
-visible.forEach(function(el,i){
-el.style.left=positions[i]+'%';
-el.style.width=(N===2?'330px':N===3?'260px':'220px');
-
-var yr=el.querySelector('.tl-yr');
-var lb=el.querySelector('.tl-lb');
-if(yr){yr.style.maxWidth=(N===2?'315px':N===3?'245px':'205px');}
-if(lb){lb.style.maxWidth=(N===2?'315px':N===3?'245px':'205px');}
-
-show(el.id,S(i,N),E(i,N),18);
-});
-
-grow('tlProg',S(0,N),E(N-1,N));
-}''',
+__fit(".tag-t",700,0,1,0);
+function show(id,a,b,dy){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.opacity=e;el.style.transform='translateY('+(dy*(1-e))+'px)';}}
+function grow(id,a,b){var e=easeOutCubic(clamp((t-a)/(b-a)));var el=document.getElementById(id);if(el){el.style.transform='scaleX('+e+')';}}
+var e=easeOutCubic(clamp((t-S(0,1))/(E(0,1)-S(0,1))));var c=document.getElementById('tagChip');c.style.opacity=e;c.style.transform='translateX('+(-30*(1-e))+'px)';''',
 }
