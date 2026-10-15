@@ -1,4 +1,4 @@
-# VC-SF-028  |  Thumbnail / first-frame card (static composite)
+# VC-SF-028  |  Thumbnail / first-frame card (
 CARD = {
     "id": "VC-SF-028",
     "slots": ["SERIES", "HEADLINE", "SUBHEAD"],
